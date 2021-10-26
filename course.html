@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Update Current Student</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+         <h1>Edit Course</h1>
+         <h3>This page is for editing a single course</h3>   
+
+         <div>
+            <table>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Currently Offered</th>
+                    <th>Price</th>
+                    <th>Instructor</th>
+                </tr>
+                <tr>
+                    <td>101</td>
+                    <td>Intro to Tech</td>
+                    <td>Yes</td>
+                    <td>$4000</td>
+                    <td>Joe Smith</td>
+                    <td>
+                        <form method="GET" action="/course">
+                            <button type="submit">Remove Course</button>
+                        </form>
+                    </td>
+
+
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <h2>Edit Current Course</h2>
+            <form action="">
+                <label for="courseName">Course Name:</label>
+                <input type="text" id="courseName" name="courseName">
+                <label for="curOffer">Currently Offered:</label>
+                <input type="checkbox" id="curOffer" name="curOffer">
+                <label for="price">Price:</label>
+                <input type="number" id="coursePrice" name="coursePrice">
+                <label for="instructor">Instructor:</label>
+                <input type="text" id="instructor" name="instructor">
+                <input type="submit" value="Update">
+            </form>
+        </div>
+    </body>
+</html>
