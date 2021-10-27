@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>View Course List</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+<body>
+    <div>
+        <img class="logo" src="homepage-images/logo.jpeg">
+    </div>
+    <div class="div_menu">
+      <ul class="ul_menu">
+        <li> <button type="button">Home</button></li>
+        <li> <button type="button">View Courses</button></li>
+        <li> <button type="button">View All Students</button></li>
+        <li> <button type="button">Record a Student Payment</button></li>
+      </ul>
+    </div>
+    <div>
+        <h2>Student Lookup</h2>
+        <h3>For quickly looking up a particular student.</h3>
+    </div>
+    <form class="centered_text">
+        <fieldset>
+            <!--JS coding is required for data validation as html is not sufficient-->
+            <label for="student_id">Student ID:</label>
+                <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
+                <br>
+            <label>OR</label>
+                <br>
+            <label for="first_name">First Name:</label>
+                <input class="input" type="text" name="first_name" id="first_name" size="40" maxlength="100" required>
+
+            <label for="last_name">Last Name:</label>
+                <input class="input" type="text" name="last_name" id="last_name" size="40" maxlength="100" required>
+                <br>
+            <input class="submit_button" type="submit" id="student_submit">
+        </fieldset>
+    </form>
+        <div>
+        <h2>Course Lookup</h2>
+        <h3>For looking up a particular course.</h3>
+    </div>
+    <form class="centered_text">
+        <fieldset>
+            <label for="course_id">Course ID:</label>
+                <input class="input" type="text" name="course_id" id="course_id" size="40" maxlength="100" required>
+                <br>
+            <label>OR</label>
+                <br>
+            <label for="course_name">Course Name:</label>
+                <input class="input" type="text" name="course_name" id="course_name" size="40" maxlength="100" required>
+                <br>
+            <input class="submit_button" type="submit" id="course_submit">
+        </fieldset>
+    </form>
+</body>
+</html>
