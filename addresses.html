@@ -7,8 +7,8 @@
     <title>All Students Page</title>
 </head>
     <body>
-        <h1>All Students Detail List</h1>
-        <h3>This page is for seeing all students and adding a student or jumping to another page for edits or payments.</h3>
+        <h1>Addresses Page</h1>
+        <h3>This page is for seeing all addresses pertaining to students.</h3>
             <div id="form_div" style="position: relative">
                     <div>
                         <img class="logo" src="homepage-images/logo.jpeg">
@@ -19,21 +19,6 @@
           <h2 class="centered_text">To add a student please enter the following:</h2>
           <form class="centered_text">
             <fieldset> <!--This is where the field is created so that input fields can be created-->
-                <label for="student_id">Student ID:</label>
-                    <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
-                    <br>
-                <label for="email">Student Email</label>
-                    <input class="input" type="email" name="email" id="email" maxlength="100" required>
-                    <br>
-                <label for="first_name">First Name:</label>
-                    <input class="input" type="text" name="first_name" id="first_name" size="40" maxlength="100" required>
-                    <br>
-                <label for="last_name">Last Name:</label>
-                    <input class="input" type="text" name="last_name" id="last_name" size="40" maxlength="100" required>
-                    <br>
-                <label for="phone">Phone:</label>
-                    <input class="input" type="text" name="phone" id="phone" size="10" maxlength="100" required>
-                    <br>
                 <label for="Street">Street Address:</label>
                     <input class="input" type="text" name="street" id="street" size="40" maxlength="100" required>
                     <br>
@@ -43,13 +28,41 @@
                 <label for="state">State:</label>
                     <input class="input" type="text" name="state" id="state" size="2" maxlength="100" required>
                     <br>
-                <label for="zip">Zip Code:</label>
-                    <input class="input" type="text" name="zip" id="zip" size="9" maxlength="100" required>
+                <label for="zip">Zip Code (U.S. ONLY):</label>
+                    <input class="input" type="text" name="zip" id="zip" size="9" maxlength="100">
+                    <br>
+                <label for="Country">Country:</label>
+                    <input class="input" type="text" name="Country" id="Country" size="40" maxlength="100" required>
                     <br>
 
                 <input class="submit_button" type="submit" id="postSubmit">
             </fieldset>
           </form>
+        </div>
+        <div>
+            <h2 class="centered_text">To Search for an address please fill one of the following:</h2>
+            <form class="centered_text">
+            <fieldset> <!--This is where the field is created so that input fields can be created-->
+                <label for="Street">Street Address:</label>
+                    <input class="input" type="text" name="street" id="street" size="40" maxlength="100">
+                    <br>
+                <label for="city">City:</label>
+                    <input class="input" type="text" name="city" id="city" size="40" maxlength="100">
+                    <br>
+                <label for="state">State:</label>
+                    <input class="input" type="text" name="state" id="state" size="2" maxlength="100">
+                    <br>
+                <label for="zip">Zip Code (U.S. ONLY):</label>
+                    <input class="input" type="text" name="zip" id="zip" size="9" maxlength="100">
+                    <br>
+                <label for="Country">Country:</label>
+                    <input class="input" type="text" name="Country" id="Country" size="40" maxlength="100">
+                    <br>
+
+                <input class="submit_button" type="submit" id="postSubmit" value="Search"/>
+            </fieldset>
+          </form>
+
         </div>
 
         <span id="res_span" class="response" style="display: none">Thank you, Payment processed for student ID: <span id="rec_student_id"></span></span>
@@ -57,28 +70,20 @@
         <div>
             <table>
                 <tr>
-                    <th>Student ID</th>
-                    <th>Email</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Phone</th>
+                    <th>Address ID</th>
                     <th>Street</th>
                     <th>City</th>
                     <th>State</th>
                     <th>Zip</th>
-                    <th>Account Balance</th>
+                    <th>Country</th>
                 </tr>
                 <tr>
-                    <td>1001231234</td>
-                    <td>johndoe@gmial.com</td>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>214-123-4567</td>
+                    <td>0005</td>
                     <td>123 Main Street</td>
                     <td>Rhome</td>
                     <td>TX</td>
                     <td>75116</td>
-                    <td>4,000</td>
+                    <td>United States</td>
                     <td>
                             <form method="GET" action="/~garzacao/payments.html">
                                 <button type="submit">Record Payment</button>
