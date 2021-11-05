@@ -54,6 +54,24 @@
                 <input type="submit" value="Add New Course">
             </form>
         </div>
-         
+        
+        <div>
+            <form class="centered_text">
+                <fieldset>
+                    <!--JS coding is required for data validation as html is not sufficient-->
+                    <legend>Course Lookup</legend>
+                    <label for="course_id">Course ID:</label>
+                    <input class="input" type="text" name="course_id" id="course_id" size="40" maxlength="100" required>
+                    <br>
+                    <label>OR</label>
+                    <br>
+                    <label for="course_name">Course Name:</label>
+                    <input class="input" type="text" name="course_name" id="course_name" size="40" maxlength="100" required>
+                    <br>
+                    <button class="submit_button" type="submit" id="course_submit">Find Course</button>
+                </fieldset>
+            </form>
+        </div>
+
     </body>
 </html>
