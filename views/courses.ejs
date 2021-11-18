@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head'); %>
+<%- include('partials/header'); %>
+
+<div>
+    <h1>Tech School Course List</h1>
+    <h3>This page is for adding, updating, and removing courses.</h3>
+</div>
+<div>
+    <img class="logo" src="homepage-images/logo.jpeg">
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Currently Offered</th>
+            <th>Price</th>
+            <th>Instructor</th>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>Intro to Tech</td>
+            <td>Yes</td>
+            <td>$4000</td>
+            <td>Joe Smith</td>
+            <td>
+                <form method="GET" action="/~garzacao/course.html">
+                    <button type="submit">Update Course</button>
+                </form>
+            </td>
+            <td>
+                <form method="GET" action="/~garzacao/course.html">
+                    <button type="submit">Remove Course</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>102</td>
+            <td>Intro to Tech II</td>
+            <td>No</td>
+            <td>$5000</td>
+            <td>Jane Smith</td>
+            <td>
+                <form method="GET" action="/~garzacao/course.html">
+                    <button type="submit">Update Course</button>
+                </form>
+            </td>
+            <td>
+                <form method="GET" action="/~garzacao/course.html">
+                    <button type="submit">Remove Course</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <h2>Add a New Course</h2>
+    <form action="">
+        <fieldset>
+            <label for="courseName">Course Name:</label>
+            <input type="text" id="courseName" name="courseName">
+            <label for="curOffer">Currently Offered:</label>
+            <input type="checkbox" id="curOffer" name="curOffer">
+            <label for="price">Price:</label>
+            <input type="number" id="coursePrice" name="coursePrice">
+            <label for="instructor">Instructor:</label>
+            <input type="text" id="instructor" name="instructor">
+            <input type="submit" value="Add New Course">
+        </fieldset>
+    </form>
+</div>
+
+<div>
+    <form class="centered_text">
+        <fieldset>
+            <!--JS coding is required for data validation as html is not sufficient-->
+            <legend>Course Lookup</legend>
+            <label for="course_id">Course ID:</label>
+            <input class="input" type="text" name="course_id" id="course_id" size="40" maxlength="100" required>
+            <br>
+            <label>OR</label>
+            <br>
+            <label for="course_name">Course Name:</label>
+            <input class="input" type="text" name="course_name" id="course_name" size="40" maxlength="100" required>
+            <br>
+            <button class="submit_button" type="submit" id="course_submit">Find Course</button>
+        </fieldset>
+    </form>
+</div>
+<%- include('partials/footer'); %>

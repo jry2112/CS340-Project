@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head'); %>
+<%- include('partials/header'); %>
+<div>
+    <h1>All Students Detail List</h1>
+    <h3>This page is for seeing all students and adding a student or jumping to another page for edits or payments.</h3>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Student ID</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Address ID</th>
+        </tr>
+        <%
+        if (userData.length != 0){
+            userData.forEach(function(data){
+            %>
+                <tr>
+                    <td><%=data.Student_ID %></td>
+                    <td><%=data.Email %></td>
+                    <td><%=data.First_Name %></td>
+                    <td><%=data.Last_Name %></td>
+                    <td><%=data.Phone %></td>
+                    <td><%=data.Address_ID %></td>
+                    <td>
+                        <form method="GET" action="/students">
+                            <button type="submit">Edit Student Info</button>
+                        </form>
+                    </td>
+                </tr>
+            
+            <% }) %>
+<%         } %>
+        
+    </table>
+</div>
+<%userData%>
+
+
+            <div>
+                <img class="logo" src="homepage-images/logo.jpeg">
+            </div>
+
+    <h2 class="centered_text">To add a student please enter the following:</h2>
+    <form action ="/students" method="POST">
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="phone">Phone</label>
+              <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone" value="5551234567" required>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="streetAddress">Street Adrress</label>
+                <input type="text" class="form-control" id="streetAddress" name="streetAddress" placeholder="Street Address" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="state">State</label>
+                <input type="text" class="form-control" id="state" name="state" placeholder="State" required>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="zip">Zip Code</label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" required>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Add Student</button>
+      </form>
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div>
+        <h2 class="centered_text">Use the following for searches:</h2>
+    <form class="centered_text">
+   
+        <label for="student_id">Student ID:</label>
+            <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
+            <br>
+        <label for="email">Student Email</label>
+            <input class="input" type="email" name="email" id="email" maxlength="100" required>
+            <br>
+        <label for="first_name">First Name:</label>
+            <input class="input" type="text" name="first_name" id="first_name" size="40" maxlength="100" required>
+            <br>
+        <label for="last_name">Last Name:</label>
+            <input class="input" type="text" name="last_name" id="last_name" size="40" maxlength="100" required>
+            <br>
+        <label for="phone">Phone:</label>
+            <input class="input" type="text" name="phone" id="phone" size="10" maxlength="100" required>
+            <br>
+        <label for="zip">Address ID:</label>
+            <input class="input" type="text" name="address_id" id="zip" size="9" maxlength="100" required>
+            <br>
+
+        <input class="submit_button" type="submit" id="postSubmit" value="Search"/>
+    </fieldset>
+    </form>
+</div>
+--> 
+
+<%- include('partials/footer'); %>
