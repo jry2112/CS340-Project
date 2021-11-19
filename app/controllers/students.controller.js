@@ -56,7 +56,6 @@ module.exports.findOne = (req, res) => {
         }
     })
 
-
 };
 
 // Update a note identified by the StudentId in the request
