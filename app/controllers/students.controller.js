@@ -40,11 +40,17 @@ module.exports.findOne = (req, res) => {
     console.log(req.params);
     let id = req.query.searchID;
     let sql = 'SELECT * FROM Students LEFT JOIN Addresses ON Students.Address_ID = Addresses.Address_ID WHERE Student_ID = ? ';
-    let coursesql = 'SELECT * FROM COURSES JOIN CurEnrolls ON COURSES WHERE'
+    let coursesql = 'SELECT * FROM Courses \
+    JOIN CurEnrolls ON Courses.Course_ID = CurEnrolls.Course_ID\
+    JOIN Students ON CurEnrolls.Student_ID = Students.Student_ID\
+    WHERE Students.Student_ID = 1;'
     sql = mysql.format(sql, id);
+    coursesql = mysql.format(coursesql, req.query.searchID);
+    console.log(coursesql);
 
     db.pool.query(sql, function (err, data){
-        if (err) throw err;
+        db.pool.query(coursesql, function(err, data){
+            if (err) throw err;
         
         // if Student not found
         if(data.length <= 0){
@@ -52,9 +58,12 @@ module.exports.findOne = (req, res) => {
         }
         //if Student found
         else{
+            console.log(data);
             res.render('student',{userData: data});
         }
     })
+        })
+        
 
 };
 
