@@ -13,44 +13,89 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Street</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Zip</th>
+                <th>Address</th>
+                <th>Delete</th>
             </tr>
-            <!--Sample Student Data-->
-            <tr>
-                <td>1234</td>
-                <td>Sample</td>
-                <td>Student</td>
-                <td>samplestudent@hello.com</td>
-                <td>555-555-5555</td>
-                <td>1234 Main St</td>
-                <td>Anywhere</td>
-                <td>US</td>
-                <td>12345</td>
-            </tr>
+            <%
+            if (userData.length != 0){
+                userData.forEach(function(data){
+                %>
+                    <tr>
+                        <td><%=data.Student_ID %></td>
+                        <td><%=data.First_Name %></td>
+                        <td><%=data.Last_Name %></td>
+                        <td><%=data.Email %></td>
+                        <td><%=data.Phone %></td>
+                        <td><%=data.Street %> <%=data.City %> <%=data.State %> <%=data.Zip %> <%=data.Country %></td>
+
+                        <td>
+                            <form action="/students/:studentID" method="DELETE"></form>
+                            <button class="btn btn-danger btn-sm" type="submit"> X </button>
+                        </td>
+                    </tr>
+                
+                <% }) %>
+    <%         } %>
+            
         </table>
     </div>
 
+    <div>
+        <table>
+            <tr>
+                <th>Courses</th>
+            </tr>
+            <%
+            if (userData.length != 0){
+                userData.forEach(function(data){
+                %>
+                    <tr></tr>
+                
+                <% }) %>
+    <%         } %>
+            
+        </table>
+    </div>
+
+
     
-</div>
-    <form action="">
-        <label for="fname">First Name:</label>
-        <input type="text" id="fname" name="fname">
-        <label for="lname">Last Name:</label>
-        <input type="text" id="lname" name="lname">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone">
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city">
-        <label for="state">State:</label>
-        <input type="text" id="state" name="state">
-        <label for="zip">Zip:</label>
-        <input type="text" id="zip" name="zip">
-        <input type="submit" value="Update Student">
-    </form>
-</div>        
+    <form action ="/students" method="PUT">
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Jane" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="sample@email.com" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="phone">Phone</label>
+              <input type="number" class="form-control" id="phone" name="phone" placeholder="5551234567" required>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="streetAddress">Street Adrress</label>
+                <input type="text" class="form-control" id="streetAddress" name="streetAddress" placeholder="Street Address" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="state">State</label>
+                <input type="text" class="form-control" id="state" name="state" placeholder="State" required>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="zip">Zip Code</label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="12345" required>
+            </div>
+        </div>  
+        <button class="btn btn-primary btn-sm" type="submit">Update</button>
+    </form> 
     <%- include('partials/footer'); %>
