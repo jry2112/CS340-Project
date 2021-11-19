@@ -37,16 +37,16 @@ module.exports.findAll = (req, res) => {
 
 // Find a single Student with a StudentID
 module.exports.findOne = (req, res) => {
-    console.log(req.params);
-    let id = req.query.searchID;
-    let sql = 'SELECT * FROM Students LEFT JOIN Addresses ON Students.Address_ID = Addresses.Address_ID WHERE Student_ID = ? ';
-    let coursesql = 'SELECT * FROM Courses \
+    let id = req.params.studentID;
+    let sql = `SELECT * FROM Students LEFT JOIN Addresses ON Students.Address_ID = Addresses.Address_ID WHERE Student_ID = ?;`;
+    let coursesql = `SELECT * FROM Courses \
     JOIN CurEnrolls ON Courses.Course_ID = CurEnrolls.Course_ID\
     JOIN Students ON CurEnrolls.Student_ID = Students.Student_ID\
-    WHERE Students.Student_ID = 1;'
+    WHERE Students.Student_ID = ?;`;
     sql = mysql.format(sql, id);
-    coursesql = mysql.format(coursesql, req.query.searchID);
-    console.log(coursesql);
+    coursesql = mysql.format(coursesql, id);
+    console.log(sql);
+    console.log(coursesql)
 
     db.pool.query(sql, function (err, data){
         db.pool.query(coursesql, function(err, data){
