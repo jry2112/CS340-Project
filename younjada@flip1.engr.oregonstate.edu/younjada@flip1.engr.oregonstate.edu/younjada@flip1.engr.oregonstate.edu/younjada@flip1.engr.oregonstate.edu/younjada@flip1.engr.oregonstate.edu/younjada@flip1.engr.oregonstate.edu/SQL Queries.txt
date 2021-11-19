@@ -1,0 +1,97 @@
+-- Update Student
+UPDATE `Students`
+SET `Email` = ?Email_Input, `First_Name` = ?First_Name_Input, `Last_Name` = ?Last_Name_Input, `Phone` = ?Phone_Input, `Address_ID` = ?Address_ID_Input
+WHERE `Student_ID` = ?Student_ID_Input;
+
+-- Delete Student
+DELETE FROM `Students`
+WHERE `Student_ID` = ?Student_ID_Input;
+
+-- Select Students
+SELECT * FROM `Students`;
+
+-- Select Student By ID
+SELECT * FROM `Students`
+WHERE `Student_ID` = ?Student_ID_Input;
+
+--Select Student by name
+SELECT * FROM `Students`
+WHERE `First_Name` LIKE '%?Name_Input%'OR
+`Last_Name` LIKE '%Name_Input%';
+
+-- Select Student by Email
+SELECT * FROM `Students`
+WHERE `Email` LIKE '%?Email_Input%';
+
+-- Select Student by Phone
+SELECT * FROM `Students`
+WHERE `Phone` LIKE '%?Phone_Input%';
+
+-- Create Courses
+CREATE TABLE `Courses` (
+  `Course_ID` INT(4) NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(255) NOT NULL,
+  `Cur_Offer` TINYINT NOT NULL,
+  `Price` DECIMAL(9,2) NOT NULL,
+  `Instructor` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`Course_ID`)
+) ENGINE = InnoDB;
+
+
+-- Insert Courses
+INSERT INTO `Courses` (`Course_ID`, `Name`, `Cur_Offer`, `Price`, `Instructor`) VALUES (1001, 'Intro to Tech I', True, 4000, 'Harry Miller');
+INSERT INTO `Courses` (`Course_ID`, `Name`, `Cur_Offer`, `Price`, `Instructor`) VALUES (1002, 'Intro to Tech II', True, 5000, 'Stephanie Gomez');
+INSERT INTO `Courses` (`Course_ID`, `Name`, `Cur_Offer`, `Price`, `Instructor`) VALUES (1003, 'Intro to Tech III', False, 6000, 'Alex Watkins');
+INSERT INTO `Courses` (`Course_ID`, `Name`, `Cur_Offer`, `Price`, `Instructor`) VALUES (4001, 'Advanced Tech', False, 10000, 'Christie Jackson');
+
+
+-- View Courses
+SELECT * FROM `Courses`;
+
+-- Filter Courses by Searching
+SELECT * FROM `Courses` WHERE `Course_ID` = ?Course_ID_Input;
+SELECT * FROM `Courses` WHERE `Course_Name` = ?Course_Name_Input;
+SELECT * FROM `Courses` WHERE `Course_ID` LIKE '%?Course_ID_Input%';
+SELECT * FROM `Courses` WHERE `Course_Name` LIKE '%?Course_Name_Input%';
+SELECT * FROM `Courses` WHERE `Instructor` LIKE '%?Instructor_Input%';
+
+
+-- Delete Course
+DELETE FROM `Courses`
+WHERE `Course_ID` = ?Course_ID_Input;
+
+-- Filter Courses with Exact Input --
+SELECT * FROM `Courses` WHERE `Course_ID` = ?Course_ID_Input;
+SELECT * FROM `Courses` WHERE `Course_Name` = ?Course_Name_Input;
+SELECT * FROM `Courses` Where `Instructor` = ?Instructor_Input;
+
+-- Create CurEnrolls
+CREATE TABLE `CurEnrolls` (
+`Student_ID` INT(11) NOT NULL,
+`Course_ID` INT(4) NOT NULL,
+`Date` DATE NOT NULL DEFAULT (CURRENT_DATE)
+) Engine=InnoDB DEFAULT CHARSET=utf8;
+
+-- Insert Enrollment Record (Date Has Default of curdate)
+INSERT INTO `CurEnrolls`(`Student_ID`, `Course_ID`) VALUES (?Student_ID_Input, ?Course_ID_Input);
+
+-- View Current Enrollment
+SELECT * FROM `CurEnrolls`;
+
+-- Filter by Student ID
+SELECT * FROM `CurEnrolls` WHERE `Student_ID` = ?Student_ID_Input;
+SELECT * FROM `CUrEnrolls` WHERE `Student_ID` LIKE '%?Student_ID_Input%';
+
+-- Filter by Course ID
+SELECT * FROM `CurEnrolls` WHERE `Course_ID` = ?Course_ID_Input;
+SELECT * FROM `CUrEnrolls` WHERE `Course_ID` LIKE '%?Course_ID_Input%';
+
+Filter by Date
+SELECT * FROM `CurEnrolls` WHERE `Date` = ?Date_Input;
+SELECT * FROM `CurEnrolls` WHERE `Date` LIKE '%?Date_Input%';
+
+-- Delete Current Enrollment
+DELETE FROM `CurEnrolls`
+WHERE `Course_ID` = ?ID_Input
+OR `Student_ID` = ?ID_Input;
+

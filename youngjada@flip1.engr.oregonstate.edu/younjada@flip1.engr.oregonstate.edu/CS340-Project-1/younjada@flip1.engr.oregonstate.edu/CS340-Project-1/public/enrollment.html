@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Update Current Enrollment</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+
+    <body>
+
+        <div class="div_menu">
+            <ul class="ul_menu">
+              <li>
+                  <form method="GET" action="/index.html">
+                      <button type="submit">Home</button>
+                  </form>
+              </li>
+              <li>
+                  <form method="GET" action="/courses.html">
+                      <button type="submit">View Courses</button>
+                  </form>
+              </li>
+              <li>
+                  <form method="GET" action="/all-students.html">
+                      <button type="submit">View All Students</button>
+                  </form>
+              </li>
+              <li>
+                  <form method="GET" action="/payments.html">
+                      <button type="submit">Record a Student Payment</button>
+                  </form>
+              </li>
+              <li>
+                  <form method="GET" action="/enrollment.html">
+                      <button type="submit">View Current Enrollment</button>
+                  </form>
+              </li>
+            </ul>
+          </div>
+          
+        <h1>Current Enrollment</h1>
+        <h3>This page is for viewing Current Course Enrollments</h3>
+
+        <div>
+            <table>
+                <tr>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Instructor</th>
+                    <th>Enrollment Date</th>
+                </tr>
+                <!--Sample Data to be Replaced by Templating-->
+                <tr>
+                    <td>1001231234</td>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>101</td>
+                    <td>Intro to Tech</td>
+                    <td>Yes</td>
+                    <td>$4000</td>
+                    <td>Joe Smith</td>
+                    <td>11/01/2021</td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <h2>Quick Search</h2>
+            <h3>Filter Enrollments based on Student information or Course information</h3>
+            <div>
+                <form class="centered_text">
+                    <fieldset>
+                        <!--JS coding is required for data validation as html is not sufficient-->
+                        <legend>Student Lookup</legend>
+                        <label for="student_id">Student ID:</label>
+                        <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
+                        <br>
+                        <label>OR</label>
+                        <br>
+                        <label for="first_name">First Name:</label>
+                        <input class="input" type="text" name="first_name" id="first_name" size="40" maxlength="100" required>
+
+                        <label for="last_name">Last Name:</label>
+                        <input class="input" type="text" name="last_name" id="last_name" size="40" maxlength="100" required>
+                        <br>
+                        <button class="submit_button" type="submit" id="student_submit">Find By Student</button>
+                    </fieldset>
+                </form>
+            </div>
+            <div>
+                <form class="centered_text">
+                    <fieldset>
+                        <!--JS coding is required for data validation as html is not sufficient-->
+                        <legend>Course Lookup</legend>
+                        <label for="course_id">Course ID:</label>
+                        <input class="input" type="text" name="course_id" id="course_id" size="40" maxlength="100" required>
+                        <br>
+                        <label>OR</label>
+                        <br>
+                        <label for="course_name">Course Name:</label>
+                        <input class="input" type="text" name="course_name" id="course_name" size="40" maxlength="100" required>
+                        <br>
+                        <button class="submit_button" type="submit" id="course_submit">Find By Course</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

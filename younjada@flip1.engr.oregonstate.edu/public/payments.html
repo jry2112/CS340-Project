@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Payment Page</title>
+</head>
+<body class="Payment_page">
+<div>
+  <img class="logo" src="homepage-images/logo.jpeg">
+</div>
+ <h1 class="centered_header1">Payment Page</h1>
+ <p class="centered_text">This page is for paying a single student's tuition balance.</p>
+ <br>
+  <div id="form_div" style="position: relative">
+      <h2 class="centered_text">Please enter the student's payment information below.</h2>
+      <form class="centered_text">
+        <fieldset> <!--This is where the field is created so that input fields can be created-->
+        <label for="student_id">Student ID:</label>
+            <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
+            <br>
+            <br/>
+            <label for="amount">Payment Amount</label>
+            <input class="input" type="number" name="amount" id="amount" min="0.01" step="0.01" max="10000" required>
+            <br>
+            <br/>
+            <label for="pay_method">Payment method:</label>
+              <select id="pay_method" name="pay_method">
+                <option value="Cash">Cash</option>
+                <option value="Check">Check</option>
+                <option value="Credit/Debit Card">Credit/Debit Card</option>
+                <option value="Wire">Wire</option>
+              </select>
+            <br>
+            <br/>
+            <label for="student_id">Course ID - (Optional):</label>
+            <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
+            <input class="submit_button" type="submit" id="postSubmit">
+        <br/>
+        </fieldset>
+        <br/>
+      </form>
+    </div>
+    <div>
+        <h2 class="centered_text">Search with one of the criteria below</h2>
+        <form class="centered_text">
+            <fieldset>
+                <!--JS coding is required for data validation as html is not sufficient-->
+                <label for="student_id">Student ID:</label>
+                <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100">
+                    <br>
+                    <br>
+                <label for="amount">Payment Amount</label>
+                <input class="input" type="number" name="amount" id="amount" min="0.01" step="0.01" max="10000">
+                    <br>
+                    <br>
+                <label for="pay_method">Payment method:</label>
+                <select id="pay_method" name="pay_method">
+                    <option value="Cash">Cash</option>
+                    <option value="Check">Check</option>
+                    <option value="Credit/Debit Card">Credit/Debit Card</option>
+                    <option value="Wire">Wire</option>
+                </select>
+                    <br>
+                    <br>
+                <label for="course_id">Course ID:</label>
+                <input class="input" type="text" name="course_id" id="course_id" size="40" maxlength="100" required>
+
+                <input class="submit_button" type="submit" id="student_submit" value="Search"/>
+            </fieldset>
+        </form>
+    </div>
+    <div>
+        <h2 class="centered_text">Payment Records</h2>
+        <table>
+            <tr>
+                <th>Student ID</th>
+                <th>Payment Amount</th>
+                <th>Payment Method</th>
+                <th>Course ID</th>
+            </tr>
+            <tr>
+                <td>1001234</td>
+                <td>2,000</td>
+                <td>Check</td>
+                <td>NULL</td>
+                <td>
+                        <form method="GET" action="/~garzacao/payments.html">
+                            <button type="submit">Record Payment</button>
+                        </form>
+                </td>
+                <td>
+                    <form method="GET" action="/~garzacao/update-student.html">
+                        <button type="submit">Edit Student Info</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+ <span id="res_span" class="response" style="display: none">Thank you, Payment processed for student ID: <span id="rec_student_id"></span></span>
+</body>
+<script src="formCode.js"></script>
+</html>

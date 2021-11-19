@@ -56,10 +56,7 @@ app.get("/", (req, res) => {
   res.render("index", {});
 });
 
-// individual student page
-app.get("/students/:id", (req, res) => {
-  res.render("student", {});
-});
+
 // courses page
 app.get("/courses", (req, res) => {
   res.render("courses", {});
@@ -70,10 +67,7 @@ app.get("/courses/:id", (req, res) => {
   res.render("course", {});
 });
 
-// enrollment page
-app.get("/enrollment", (req, res) => {
-  res.render("enrollment", {});
-});
+
 
 // payments page
 app.get("/payments", (req, res) => {
@@ -87,6 +81,7 @@ app.get("/accounts", (req, res) => {
 
 app.listen(port, () => {
   require("./app/routes/students.routes.js")(app);
+  require("./app/routes/enrollment.routes.js")(app);
   console.log(`Server started on port ${port}`);
   console.log(`Connecting to database ${database} on ${host}`);
 });

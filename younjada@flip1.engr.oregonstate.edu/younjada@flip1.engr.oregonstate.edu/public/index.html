@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div>
+        <img class="logo" src="homepage-images/logo.jpeg">
+    </div>
+    <div class="div_menu">
+      <ul class="ul_menu">
+        <li>
+            <form method="GET" action="/~garzacao/index.html">
+                <button type="submit">Home</button>
+            </form>
+        </li>
+        <li>
+            <form method="GET" action="/~garzacao/courses.html">
+                <button type="submit">View Courses</button>
+            </form>
+        </li>
+        <li>
+            <form method="GET" action="/~garzacao/course.html">
+                <button type="submit">Course</button>
+            </form>
+        </li>
+        <li>
+            <form method="GET" action="/~garzacao/all-students.html">
+                <button type="submit">All Students</button>
+            </form>
+        </li>
+        <li>
+            <form method="GET" action="/~garzacao/update-student.html">
+                <button type="submit">Update Students</button>
+            </form>
+        </li>
+        <li>
+            <form method="GET" action="/~garzacao/stuaccts.html">
+                <button type="submit">View All Students</button>
+            </form>
+        </li>
+        <li>
+            <form method="GET" action="/~garzacao/payments.html">
+                <button type="submit">Record a Student Payment</button>
+            </form>
+        </li>
+        <li>
+            <form method="GET" action="/~garzacao/addresses.html">
+                <button type="submit">Addresses</button>
+            </form>
+        </li>
+        <li>
+            <form method="GET" action="/~garzacao/enrollment.html">
+                <button type="submit">Enrollment</button>
+            </form>
+        </li>
+      </ul>
+    </div>
+    <div>
+        <h2>Student Lookup</h2>
+        <h3>For quickly looking up a particular student to edit.</h3>
+    </div>
+    <form class="centered_text">
+        <fieldset>
+            <!--JS coding is required for data validation as html is not sufficient-->
+            <label for="student_id">Student ID:</label>
+                <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
+                <br>
+            <label>OR</label>
+                <br>
+            <label for="first_name">First Name:</label>
+                <input class="input" type="text" name="first_name" id="first_name" size="40" maxlength="100" required>
+
+            <label for="last_name">Last Name:</label>
+                <input class="input" type="text" name="last_name" id="last_name" size="40" maxlength="100" required>
+                <br>
+            <input class="submit_button" type="submit" id="student_submit">
+        </fieldset>
+    </form>
+        <div>
+        <h2>Course Lookup</h2>
+        <h3>For looking up a particular course to edit.</h3>
+    </div>
+    <form class="centered_text">
+        <fieldset>
+            <label for="course_id">Course ID:</label>
+                <input class="input" type="text" name="course_id" id="course_id" size="40" maxlength="100" required>
+                <br>
+            <label>OR</label>
+                <br>
+            <label for="course_name">Course Name:</label>
+                <input class="input" type="text" name="course_name" id="course_name" size="40" maxlength="100" required>
+                <br>
+            <input class="submit_button" type="submit" id="course_submit">
+        </fieldset>
+    </form>
+</body>
+</html>

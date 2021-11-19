@@ -18,58 +18,68 @@
             <th>Instructor</th>
             <th>Enrollment Date</th>
         </tr>
-        <!--Sample Data to be Replaced by Templating-->
-        <tr>
-            <td>1001231234</td>
-            <td>John</td>
-            <td>Doe</td>
-            <td>101</td>
-            <td>Intro to Tech</td>
-            <td>Yes</td>
-            <td>$4000</td>
-            <td>Joe Smith</td>
-            <td>11/01/2021</td>
-        </tr>
+        <%
+        if (userData.length != 0){
+            userData.forEach(function(data){
+            %>
+                <tr>
+                    <td><%=data.Student_ID %></td>
+                    <td><%=data.First_Name %></td>
+                    <td><%=data.Last_Name %></td>
+                    <td><%=data.Course_ID %></td>
+                    <td><%=data.Name %></td>
+                    <td><%=data.Instructor %></td>
+                    <td><%=data.Date %></td>
+
+                    <td>
+                        <form action="/enrollment" method="DELETE"></form>
+                        <button class="btn btn-danger btn-sm" type="submit"> X </button>
+                    </td>
+                </tr>
+            
+            <% }) %>
+<%         } %>
+        
     </table>
 </div>
+<div>
+    <h2>Enroll a Student</h2>
+    <div class="">
+        <form action="/enrollment" method="POST">
+            <div class="form-group">
+                <label for="studentID">Enter Student ID:</label>
+                <input type="text" name="studentID">
+                    
+                <label for="courseID">Enter Course ID:</label>
+                <input type="text" name="courseID">
+                    
+                <button class="btn btn-alert">Enroll</button>
+              </div>
+        </form>
+
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
 
 <div>
     <h2>Quick Search</h2>
     <h3>Filter Enrollments based on Student information or Course information</h3>
     <div>
-        <form class="centered_text">
+        <form class="" action="enrollment/search" method="GET">
             <fieldset>
                 <!--JS coding is required for data validation as html is not sufficient-->
-                <legend>Student Lookup</legend>
-                <label for="student_id">Student ID:</label>
-                <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
+                <label for="searchID">Enter Student or Course ID</label>
+                <input class="input" type="text" name="searchID" required>
                 <br>
-                <label>OR</label>
-                <br>
-                <label for="first_name">First Name:</label>
-                <input class="input" type="text" name="first_name" id="first_name" size="40" maxlength="100" required>
-
-                <label for="last_name">Last Name:</label>
-                <input class="input" type="text" name="last_name" id="last_name" size="40" maxlength="100" required>
-                <br>
-                <button class="submit_button" type="submit" id="student_submit">Find By Student</button>
-            </fieldset>
-        </form>
-    </div>
-    <div>
-        <form class="centered_text">
-            <fieldset>
-                <!--JS coding is required for data validation as html is not sufficient-->
-                <legend>Course Lookup</legend>
-                <label for="course_id">Course ID:</label>
-                <input class="input" type="text" name="course_id" id="course_id" size="40" maxlength="100" required>
-                <br>
-                <label>OR</label>
-                <br>
-                <label for="course_name">Course Name:</label>
-                <input class="input" type="text" name="course_name" id="course_name" size="40" maxlength="100" required>
-                <br>
-                <button class="submit_button" type="submit" id="course_submit">Find By Course</button>
+                <button class="submit" type="submit">Find By ID</button>
             </fieldset>
         </form>
     </div>
