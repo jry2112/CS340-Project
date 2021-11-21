@@ -3,7 +3,7 @@ const ejs = require("ejs");
 const app = express();
 
 const path = require("path");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 7473;
 
 // Load DB connection settings from dotenv and connect
 const dotenv = require("dotenv").config();

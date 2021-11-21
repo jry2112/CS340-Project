@@ -6,7 +6,7 @@
     <h1> Sample Student</h1>
     <h3>This page is for editing the current student</h3>
     <div>
-        <table>
+        <table class="table">
             <tr>
                 <th>Student ID</th>
                 <th>First Name</th>
@@ -17,8 +17,8 @@
                 <th>Delete</th>
             </tr>
             <%
-            if (userData.length != 0){
-                userData.forEach(function(data){
+            if (studentData.length != 0){
+                studentData.forEach(function(data){
                 %>
                     <tr>
                         <td><%=data.Student_ID %></td>
@@ -35,19 +35,23 @@
                     </tr>
                 
                 <% }) %>
-    <%         } %>
+    <%      } %>
             
         </table>
     </div>
 
     <div>
-        <table>
+        <table class="table">
             <tr>
                 <th>Courses</th>
             </tr>
-            <%
-            if (userData.length != 0){
-                userData.forEach(function(data){
+            <%  if (courseData.length == 0){ 
+                %>
+                <tr><td>No Courses Found</td></tr>
+           <% } else {
+
+            }
+                courseData.forEach(function(data){
                 %>
                     <tr>
                         <td><%=data.Course_ID %></td>
@@ -61,7 +65,6 @@
                     </tr>
                 
                 <% }) %>
-    <%         } %>
             
         </table>
     </div>

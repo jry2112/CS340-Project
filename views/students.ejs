@@ -10,7 +10,7 @@
 <form action="/students" method="GET"></form>
 
 <div>
-    <table>
+    <table class="table">
         <tr>
             <th>Student ID</th>
             <th>First Name</th>
@@ -48,8 +48,6 @@
         
     </table>
 </div>
-<%userData%>
-
 
     <h2 class="centered_text">To add a student please enter the following:</h2>
     <form action ="/students" method="POST">
@@ -87,6 +85,10 @@
             <div class="col-md-2 mb-3">
                 <label for="zip">Zip Code</label>
                 <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip" required>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
             </div>
         </div>
 
