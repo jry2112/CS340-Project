@@ -23,13 +23,33 @@ exports.create = (req, res) => {
         req.body.studentID,
         req.body.courseID
     ];
-    // Save Enrollemnt in the database
+
+    // Validate that Course is CurOffered
+    let validateSql = 'SELECT Cur_Offer FROM Courses WHERE Course_ID = ?';
+    validateSql = mysql.format(validateSql, req.body.courseID)
     let sql = 'INSERT INTO CurEnrolls (Student_ID, Course_ID) VALUES (?,?)';
     sql = mysql.format(sql, enrollment);
-    db.pool.query(sql, (err, data, res) => {
+    db.pool.query(validateSql, (err, data) => {
         if (err) throw err;
-    })
-   this.findAll(req,res);
+        // If course is not offered
+        data =  JSON.parse(JSON.stringify(data));
+        console.log(data[0].Cur_Offer)
+        if (data[0].Cur_Offer == 0) {
+            console.log(data);
+            errorMessage = [
+                {error: "Error: Course is not Currently Offered"}];
+            res.render('error', {errorMessage: errorMessage});
+        } else {
+            // Enroll the student
+            db.pool.query(sql, (err, data, res) => {
+                if (err) throw err;
+                console.log("Student Enrolled")
+        })
+        this.findAll(req,res);
+        }    
+
+    });
+
 };
 
 
@@ -59,16 +79,16 @@ module.exports.findOne = (req, res) => {
 
 };
 
-// Update a note identified by the StudentId in the request
+// Update an Enrollment identified by the StudentId in the request
 module.exports.update = (req, res) => {
 
 };
 
-// Delete a note with the specified StudentId in the request
+// Delete an Enrollment with the specified StudentId in the request
 module.exports.delete = (req, res) => {
-    console.log(req.params);
-    let id = req.params.studentID;
-    let sql = 'DELETE FROM Students WHERE Student_ID = ?';
+    console.log(req);
+    let id = req.params.enrollmentID;
+    let sql = 'DELETE FROM Cur_Enrolls WHERE Student_ID = ?';
     sql = mysql.format(sql, id);
 
     db.pool.query(sql, function (err, data){

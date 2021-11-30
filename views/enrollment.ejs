@@ -8,7 +8,7 @@
 <h3>This page is for viewing Current Course Enrollments</h3>
 
 <div>
-    <table>
+    <table class="table">
         <tr>
             <th>Student ID</th>
             <th>First Name</th>
@@ -29,11 +29,12 @@
                     <td><%=data.Course_ID %></td>
                     <td><%=data.Name %></td>
                     <td><%=data.Instructor %></td>
-                    <td><%=data.Date %></td>
+                    <td><%=data.Date.toLocaleDateString("en-US"); %></td>
 
                     <td>
-                        <form action="/enrollment" method="DELETE"></form>
-                        <button class="btn btn-danger btn-sm" type="submit"> X </button>
+                        <form action="/enrollment/<%=data.Student_ID%><%=data.Course_ID%><%=data.Date.getMonth()%><%=data.Date.getFullYear()%>" method="DELETE">
+                            <button class="btn btn-danger btn-sm deleteEnroll" type="submit"> X </button>
+                        </form>
                     </td>
                 </tr>
             

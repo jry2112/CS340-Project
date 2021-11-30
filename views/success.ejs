@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head'); %>
+<%- include('partials/header'); %>
+<% 
+if (successMessage.length != 0){
+    successMessage.forEach(function(data){
+    %>
+    <p><%= data.success%></p>
+    <% }) %>
+<% } %>
+<%- include('partials/footer'); %>
+
+<!-- Use me for adding new pages. head, body, and footer tags are not required (already included in partials)-->

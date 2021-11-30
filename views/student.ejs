@@ -18,7 +18,7 @@
             </tr>
             <%
             if (studentData.length != 0){
-                studentData.forEach(function(data){
+                data = studentData[0];
                 %>
                     <tr>
                         <td><%=data.Student_ID %></td>
@@ -30,12 +30,11 @@
 
                         <td>
                             <form action="/students/:studentID" method="DELETE"></form>
-                            <button class="btn btn-danger btn-sm" type="submit"> X </button>
+                            <button class="btn btn-danger btn-sm delStudentButton" type="submit"> X </button>
                         </td>
                     </tr>
                 
-                <% }) %>
-    <%      } %>
+                <% } %>
             
         </table>
     </div>
@@ -59,7 +58,6 @@
                         <td><%=data.Instructor %></td>
                         <td><%=data.Price %></td>
                         <td>
-                            <form action="" method="DELETE"></form>
                             <button class="btn btn-danger btn-sm" type="submit"> X </button>
                         </td>
                     </tr>
@@ -69,45 +67,54 @@
         </table>
     </div>
 
-
-    
-    <form action ="/students" method="PUT">
+ 
+    <div>
+        <h2>Edit Current Student</h2>
+    </div>
+    <form action ="" method="" id="updateStudentForm">
         <div class="row">
-          <div class="col-md-3 mb-3">
-            <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Jane" required>
+          <div class="col-md-3 mb-3 form-floating">
+            <input type="text" class="form-control" id="firstName" name="firstName" value="<%=data.First_Name%>" required>
+            <label for="firstName" class="form-label">First name</label>
+            
           </div>
           <div class="col-md-3 mb-3">
-            <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" required>
+            <label for="lastName" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" value="<%=data.Last_Name%>" required>
           </div>
           <div class="col-md-3 mb-3">
             <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="sample@email.com" required>
+              <input type="email" class="form-control" id="email" name="email" value="<%=data.Email%>" required>
           </div>
           <div class="col-md-3 mb-3">
             <label for="phone">Phone</label>
-              <input type="number" class="form-control" id="phone" name="phone" placeholder="5551234567" required>
+              <input type="number" class="form-control" id="phone" name="phone" value="<%=data.Phone%>" required>
           </div>
         </div>
         <div class="row">
             <div class="col-md-4 mb-3">
                 <label for="streetAddress">Street Adrress</label>
-                <input type="text" class="form-control" id="streetAddress" name="streetAddress" placeholder="Street Address" required>
+                <input type="text" class="form-control" id="streetAddress" name="streetAddress" value="<%=data.Street%>" required>
             </div>
             <div class="col-md-4 mb-3">
                 <label for="city">City</label>
-                <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
+                <input type="text" class="form-control" id="city" name="city" value="<%=data.City%>" required>
             </div>
             <div class="col-md-2 mb-3">
                 <label for="state">State</label>
-                <input type="text" class="form-control" id="state" name="state" placeholder="State" required>
+                <input type="text" class="form-control" id="state" name="state" value="<%=data.State%>" required>
             </div>
             <div class="col-md-2 mb-3">
                 <label for="zip">Zip Code</label>
-                <input type="text" class="form-control" id="zip" name="zip" placeholder="12345" required>
+                <input type="text" class="form-control" id="zip" name="zip" value="<%=data.Zip%>" required>
+            </div>
+            <div class="col-md-2 mb-3">
+                <input type="text" class="form-control" id="country" name="country" value="<%=data.Country%>" required>
+                <label for="country">Country</label>
             </div>
         </div>  
-        <button class="btn btn-primary btn-sm" type="submit">Update</button>
+        <input class="btn btn-primary btn-sm" type="button" value="Update" id="updateStuButton" onclick="event.preventDefault(); updateStudent(<%=data.Student_ID%>)">Update</button>
     </form> 
+
+    <script type="text/javascript" src="../js/students.js"></script>
     <%- include('partials/footer'); %>

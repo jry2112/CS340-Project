@@ -6,12 +6,10 @@ module.exports = (app) =>{
     
     // Retrieve a Student:
     //by ID, Email, or Phone:
-    app.get('/students/:studentID', function(req, res){
-        students.findOne(req,res);
-    });
+    app.get('/students/:studentID', students.findOne);
     
     // Insert a Student
-    app.post('/students', students.create)
+    app.post('/students', students.create);
     // Update a Student
     app.put('/students/:studentID', students.update);
     // Delete a Student

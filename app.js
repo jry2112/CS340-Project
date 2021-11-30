@@ -3,7 +3,7 @@ const ejs = require("ejs");
 const app = express();
 
 const path = require("path");
-const port = process.env.PORT || 7473;
+const port = process.env.PORT || 8080;
 
 // Load DB connection settings from dotenv and connect
 const dotenv = require("dotenv").config();
@@ -17,7 +17,7 @@ app.set("views", path.join(__dirname, "views"));
 
 // bodyparser
 app.use(express.urlencoded({ extended: true }));
-//app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 /*
 // use res.render to load up an ejs view file
 app.get('/', function(req, res)
