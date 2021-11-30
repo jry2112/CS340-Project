@@ -17,7 +17,7 @@ app.set("views", path.join(__dirname, "views"));
 
 // bodyparser
 app.use(express.urlencoded({ extended: true }));
-//app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 /*
 // use res.render to load up an ejs view file
 app.get('/', function(req, res)

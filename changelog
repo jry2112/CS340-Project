@@ -1,0 +1,21 @@
+Updated Add Student so that Address ID is linked back to new Student
+
+Added Unique Constraint to Students to prevent duplicates:
+CREATE UNIQUE INDEX stu_data ON Students(First_Name, Last_Name, Phone); 
+
+Added Unique Constraint to Addresses to prevent duplicates:
+CREATE UNIQUE INDEX address_data ON Addresses (Street, City, State);
+
+Fixed Find Student by ID:
+searchID is located in req.query.searchID
+
+Added Validation to CurEnroll:
+Cannot enroll student in course that is currently offered
+
+Added Delete Student:
+Created AJAX route to handle delete student request (work on page reload after submission)
+
+Added Update Student:
+Created AJAX routed to handle Student Update. 
+
+Continue working on page refresh for AJAX
