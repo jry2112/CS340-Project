@@ -1,8 +1,5 @@
 const db = require("../../database/dbcon1.js");
 const mysql = require('mysql');
-const { findAll } = require("./enrollment.controller.js");
-const { express } = require("express");
-
 // Create and Save a new Student
 exports.create = (req, res) => {
     // Validate request
@@ -171,13 +168,14 @@ module.exports.delete = (req, res) => {
         
                 // if Student not found
                 if(data.length <= 0){
-                    window.alert('Error. Please try again.');
-                    res.redirect('/students');
+                    var msg = 'Error. Please try again.';
+                    
                     
                 //if Student found
                 } else {
-                    window.alert(`Student ${id} Successfully Deleted`);
-                }      
+                    var msg = `Student ${id} Successfully Deleted`;
+                } 
+                res.redirect('/students');     
             });
         })
     })
