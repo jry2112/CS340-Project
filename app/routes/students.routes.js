@@ -6,7 +6,7 @@ module.exports = (app) =>{
     
     // Retrieve a Student:
     //by ID, Email, or Phone:
-    app.get('/students/search', function(req, res){
+    app.get('/students/:studentID', function(req, res){
         students.findOne(req,res);
     });
     
