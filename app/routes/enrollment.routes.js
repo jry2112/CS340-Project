@@ -12,7 +12,8 @@ module.exports = (app) =>{
     });
     
     // Insert an Enrollment
+    app.get('/enrollment/add', enrollment.form);
     app.post('/enrollment', enrollment.create)
     // Delete an Enrollment
-    app.delete('/students/:studentID/courses/:courseID/date/:date', enrollment.delete);
+    app.delete('/students/:studentID/courses/:courseID/date/:month/:day/:year', enrollment.delete);
 }

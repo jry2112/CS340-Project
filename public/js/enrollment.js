@@ -18,6 +18,7 @@ function deleteEnrollment(stuID, courseID, date) {
         xmlhttp.onreadystatechange = () => {
             if (xmlhttp.onreadystatechange == 4 && xmlhttp.status == 200) {
                 // Request completed
+                window.location.reload()
             }
         }
         xmlhttp.open("DELETE", url, true);

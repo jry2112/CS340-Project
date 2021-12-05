@@ -25,12 +25,14 @@ function updateStudent (studentID) {
         xmlhttp.onreadystatechange = () => {
             if (xmlhttp.onreadystatechange == 4 && xmlhttp.status == 200) {
                 // Request completed
+                
             }
         }
         xmlhttp.open("PUT", url, true);
         xmlhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
         xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xmlhttp.send(data);
+        window.location.href = "/students"
     }
 
     };
@@ -50,6 +52,7 @@ function deleteStudent(studentID) {
         }
         xmlhttp.open("DELETE", url, true);
         xmlhttp.send();
+        window.location.href = "/students"
     }
 }
 

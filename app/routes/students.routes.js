@@ -11,7 +11,10 @@ module.exports = (app) => {
   // Retrieve a Student:
   //by ID:
   app.get("/students/edit/:studentID", students.findOne);
-
+  app.get('/students/search', function(req, res){
+    console.log(req.query);
+    students.findOne(req,res);
+});
   // Insert a Student
   app.get('/students/add', students.form);
   app.post("/students", students.create);

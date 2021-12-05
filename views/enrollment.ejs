@@ -1,6 +1,13 @@
 <h1>Current Enrollment</h1>
 <h3>This page is for viewing Current Course Enrollments</h3>
-
+<div class="row">
+    <div class="col-6"><h1>Enrollments</h1></div>
+    <div class="col-6 d-flex justify-content-end">
+      <a href="/enrollment/add" type="button" class="btn btn-primary align-self-center">Enroll a Student</a>
+    </div>
+  
+  
+  </div>
 <div>
     <table class="table">
         <tr>
@@ -34,38 +41,12 @@
         
     </table>
 </div>
-<div>
-    <h2>Enroll a Student</h2>
-    <div class="">
-        <form action="/enrollment" method="POST">
-            <div class="form-group">
-                <label for="studentID">Enter Student ID:</label>
-                <input type="text" name="studentID">
-                    
-                <label for="courseID">Enter Course ID:</label>
-                <input type="text" name="courseID">
-                    
-                <button class="btn btn-alert">Enroll</button>
-              </div>
-        </form>
-
-    </div>
-    
-</div>
-
-
-
-
-
-
-
-
 
 <div>
     <h2>Quick Search</h2>
     <h3>Filter Enrollments based on Student information or Course information</h3>
     <div>
-        <form class="" action="enrollment/search" method="GET">
+        <form class="" action="/enrollment/search" method="GET">
             <fieldset>
                 <!--JS coding is required for data validation as html is not sufficient-->
                 <label for="searchID">Enter Student or Course ID</label>

@@ -1,0 +1,45 @@
+<div>
+    <h2>Enroll a Student</h2>
+    <div class="">
+        <form action="/enrollment" method="POST">
+            <div class="row">
+                <div class="form-group col-4">
+                    <div class="form-group form-floating">
+                        
+                        <select id="studentID" name="studentID" class="form-control" placeholder="Student ID" value="<%= students.Student_ID %>" required>
+    
+                     <!-- for loop code start -->
+                        <% for(var i=0; i < students.length; i++) { %>
+                            <% console.log(students) %>
+                        <option value="<%= students[i].Student_ID %>"><%= students[i].Student_ID%></option>
+                        <% } %>
+                     <!-- for loop code end -->                
+                     
+                          </select>
+                          <label for="studentID">Student ID</label>
+                      </div> 
+                </div>
+                <div class="form-group col-4">
+                    <div class="form-group form-floating">
+                        
+                        <select id="courseID" name="courseID" class="form-control" value="<%= courses.Student_ID %>" required>
+    
+                     <!-- for loop code start -->
+                        <% for(var i=0; i < courses.length; i++) { %>
+                            <% console.log(courses) %>
+                        <option value="<%= courses[i].Course_ID %>"><%= courses[i].Course_ID%></option>
+                        <% } %>
+                     <!-- for loop code end -->                
+                     
+                          </select>
+                          <label for="courseID">Course ID</label>
+                      </div> 
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary btn-md" type="submit">Enroll in Course</button>
+                </div>
+
+            </div>
+        </form>
+    </div>   
+</div>

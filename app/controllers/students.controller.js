@@ -172,7 +172,10 @@ module.exports.findOne = (req, res) => {
     console.log(req.params);
     // Query if filtering, params if Edit button
     let id = req.query.searchID || req.params.studentID;
-    let sql = `SELECT * FROM Students LEFT JOIN Addresses ON Students.Address_ID = Addresses.Address_ID WHERE Student_ID = ?`;
+    if (id === req.query.searchID) {
+        id = "%" + id + "%";
+    }
+    let sql = `SELECT * FROM Students LEFT JOIN Addresses ON Students.Address_ID = Addresses.Address_ID WHERE Student_ID LIKE ?`;
     let coursesql = `SELECT Courses.Course_ID, Courses.Name, Courses.Instructor FROM Courses \
     JOIN CurEnrolls ON Courses.Course_ID = CurEnrolls.Course_ID\
     JOIN Students ON CurEnrolls.Student_ID = Students.Student_ID\
@@ -184,6 +187,9 @@ module.exports.findOne = (req, res) => {
 
     db.pool.query(sql, function (err, student){
         if (err) throw err;
+        if (student.length > 1) {
+            res.render('students', {userData: student})
+        }
       //  console.log(student);
         db.pool.query(coursesql, function(err, courses){
             if (err) throw err;
@@ -229,11 +235,11 @@ module.exports.update = (req, res) => {
             // Update new Student Info
             db.pool.query(studentSql, function(err, result){
                 if (err) throw err;
-                res.render('success', {successMessage: ["Student Updated"]})
+                
             })
         })
     })
-
+    res.redirect(303, '/students');
 };
 
 // Delete a student with the specified StudentId in the request
@@ -242,7 +248,7 @@ module.exports.delete = (req, res) => {
     let id = req.params.studentID;
     let sql = 'DELETE FROM Students WHERE Student_ID = ?';
     let getAddressSql = 'SELECT Address_ID FROM Students WHERE Student_ID = ?';
-    let delAddressSql = 'DELETE FROM Addresses WHERE Address_ID = ?';
+    let delAddressSql = 'DELETE FROM Addresses WHERE Address_ID = ? AND NOT EXISTS(SELECT * FROM Students WHERE Address_ID = ? AND Student_ID != ?);';
     sql = mysql.format(sql, id);
     getAddressSql = mysql.format(getAddressSql, id);
 
@@ -257,9 +263,9 @@ module.exports.delete = (req, res) => {
         if (addressID == null) {
             delAddressSql = mysql.format(delAddressSql, 0)
         } else {
-            delAddressSql = mysql.format(delAddressSql, addressID);
+            delAddressSql = mysql.format(delAddressSql, [addressID, addressID, id]);
         }
-
+        console.log(delAddressSql)
         // Delete Address
         db.pool.query(delAddressSql, function(err, data){
             if(err) throw err;
@@ -276,10 +282,11 @@ module.exports.delete = (req, res) => {
                 } else {
                     var msg = `Student ${id} Successfully Deleted`;
                     console.log(msg);
-                    students.findAll(req, res);
+                   
                 }      
             });
-        })
+        });
+        
     })
-    
+    res.redirect(303, '/students');
 };
