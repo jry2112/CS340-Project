@@ -158,8 +158,12 @@ module.exports.findAll = (req, res) => {
     let sql = 'SELECT * FROM Students LEFT JOIN Addresses ON Students.Address_ID = Addresses.Address_ID ORDER BY Student_ID asc'; 
 
     db.pool.query(sql, function(err, data){
-        if (err) throw err;
-        res.render('students', {userData: data});
+        if (err){
+            throw err;  
+        } else {
+            res.render('students', {userData: data});
+        }
+
     })
 };  
 
@@ -225,10 +229,11 @@ module.exports.update = (req, res) => {
             // Update new Student Info
             db.pool.query(studentSql, function(err, result){
                 if (err) throw err;
+                res.render('success', {successMessage: ["Student Updated"]})
             })
         })
     })
-   res.render('success', {successMessage: ["Student Updated"]})
+
 };
 
 // Delete a student with the specified StudentId in the request
@@ -270,9 +275,11 @@ module.exports.delete = (req, res) => {
                 //if Student found
                 } else {
                     var msg = `Student ${id} Successfully Deleted`;
+                    console.log(msg);
+                    students.findAll(req, res);
                 }      
             });
         })
     })
-    this.findAll(req, res);
+    
 };
