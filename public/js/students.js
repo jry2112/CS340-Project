@@ -43,7 +43,6 @@ function deleteStudent(studentID) {
     var xmlhttp = new XMLHttpRequest();
 
     if (confirm('Are you sure you want to delete this student?') == true) {
-        
         xmlhttp.onreadystatechange = () => {
             if (xmlhttp.onreadystatechange == 4 && xmlhttp.status == 200) {
                 // Request completed

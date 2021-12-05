@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<%- include('partials/head'); %>
-<%- include('partials/header'); %>
-    
 <h1>Current Enrollment</h1>
 <h3>This page is for viewing Current Course Enrollments</h3>
 
@@ -23,18 +17,15 @@
             userData.forEach(function(data){
             %>
                 <tr>
-                    <td><%=data.Student_ID %></td>
+                    <td class="studentID"><%=data.Student_ID %></td>
                     <td><%=data.First_Name %></td>
                     <td><%=data.Last_Name %></td>
-                    <td><%=data.Course_ID %></td>
+                    <td class="courseID"><%=data.Course_ID %></td>
                     <td><%=data.Name %></td>
                     <td><%=data.Instructor %></td>
-                    <td><%=data.Date.toLocaleDateString("en-US"); %></td>
-
+                    <td class="enrollmentDate"><%=data.Date.toLocaleDateString("en-US"); %></td>
                     <td>
-                        <form action="/enrollment/<%=data.Student_ID%><%=data.Course_ID%><%=data.Date.getMonth()%><%=data.Date.getFullYear()%>" method="DELETE">
-                            <button class="btn btn-danger btn-sm deleteEnroll" type="submit"> X </button>
-                        </form>
+                        <button class="btn btn-danger btn-sm delEnrollmentButton" type="submit" data-student="<%=data.Student_ID %>" data-course="<%=data.Course_ID %>" data-date="<%=data.Date.toLocaleDateString('en-US')%>" onclick="deleteEnrollment(this.getAttribute('data-student'),this.getAttribute('data-course'),this.getAttribute('data-date'))"> X </button>
                     </td>
                 </tr>
             
@@ -85,5 +76,5 @@
         </form>
     </div>
 </div>
-
+<script type="text/javascript" src="../js/enrollment.js"></script>
 <%- include('partials/footer'); %>

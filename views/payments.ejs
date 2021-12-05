@@ -1,100 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<%- include('partials/head'); %>
-<%- include('partials/header'); %>
-<div>
-    
+<%- include('partials/payments-search') %>
+
+<br>
+
+<div class="row">
+  <div class="col-6"><h1>Payments</h1></div>
+  <div class="col-6 d-flex justify-content-end">
+    <a href="/paymentAdd" type="button" class="btn btn-primary align-self-center">Record Payment</a>
   </div>
-   <h1 class="centered_header1">Payment Page</h1>
-   <p class="centered_text">This page is for paying a single student's tuition balance.</p>
-   <br>
-   <div>
-    <h2 class="centered_text">Payment Records</h2>
-    <table>
-        <tr>
-            <th>Student ID</th>
-            <th>Payment Amount</th>
-            <th>Payment Method</th>
-            <th>Course ID</th>
-        </tr>
-        <tr>
-            <td>1001234</td>
-            <td>2,000</td>
-            <td>Check</td>
-            <td>NULL</td>
-            <td>
-                    <form method="GET" action="/~garzacao/payments.html">
-                        <button type="submit">Record Payment</button>
-                    </form>
-            </td>
-            <td>
-                <form method="GET" action="/~garzacao/update-student.html">
-                    <button type="submit">Edit Student Info</button>
-                </form>
-            </td>
-        </tr>
-    </table>
+
+
 </div>
-    <div id="form_div" style="position: relative">
-        <h2 class="centered_text">Please enter the student's payment information below.</h2>
-        <form class="centered_text">
-          <fieldset> <!--This is where the field is created so that input fields can be created-->
-          <label for="student_id">Student ID:</label>
-              <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
-              <br>
-              <br/>
-              <label for="amount">Payment Amount</label>
-              <input class="input" type="number" name="amount" id="amount" min="0.01" step="0.01" max="10000" required>
-              <br>
-              <br/>
-              <label for="pay_method">Payment method:</label>
-                <select id="pay_method" name="pay_method">
-                  <option value="Cash">Cash</option>
-                  <option value="Check">Check</option>
-                  <option value="Credit/Debit Card">Credit/Debit Card</option>
-                  <option value="Wire">Wire</option>
-                </select>
-              <br>
-              <br/>
-              <label for="student_id">Course ID - (Optional):</label>
-              <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100" required>
-              <input class="submit_button" type="submit" id="postSubmit">
-          <br/>
-          </fieldset>
-          <br/>
-        </form>
-      </div>
-      <div>
-          <h2 class="centered_text">Search with one of the criteria below</h2>
-          <form class="centered_text">
-              <fieldset>
-                  <!--JS coding is required for data validation as html is not sufficient-->
-                  <label for="student_id">Student ID:</label>
-                  <input class="input" type="text" name="student_id" id="student_id" size="40" maxlength="100">
-                      <br>
-                      <br>
-                  <label for="amount">Payment Amount</label>
-                  <input class="input" type="number" name="amount" id="amount" min="0.01" step="0.01" max="10000">
-                      <br>
-                      <br>
-                  <label for="pay_method">Payment method:</label>
-                  <select id="pay_method" name="pay_method">
-                      <option value="Cash">Cash</option>
-                      <option value="Check">Check</option>
-                      <option value="Credit/Debit Card">Credit/Debit Card</option>
-                      <option value="Wire">Wire</option>
-                  </select>
-                      <br>
-                      <br>
-                  <label for="course_id">Course ID:</label>
-                  <input class="input" type="text" name="course_id" id="course_id" size="40" maxlength="100" required>
-  
-                  <input class="submit_button" type="submit" id="student_submit" value="Search"/>
-              </fieldset>
-          </form>
-      </div>
-     
-   <span id="res_span" class="response" style="display: none">Thank you, Payment processed for student ID: <span id="rec_student_id"></span></span>
-  
-    
-<%- include('partials/footer'); %>
+
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Pay ID</th>
+      <th scope="col">Student ID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Pay Method</th>
+      <th scope="col">Date</th>
+      <th scope="col">Course ID</th>
+      <th scope="col" class="text-left">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% rows.forEach(element => { %>
+    <tr>
+      <th scope="row"><%= element.Pay_ID %></th>
+      <td><%= element.Student_ID %></td>
+      <td><%= element.First_Name %></td>
+      <td><%= element.Last_Name %></td>
+      <td><%= element.Amount %></td>
+      <td><%= element.Method %></td>
+      <td><%= new Date(element.Date).toISOString().slice(0, 10); %></td>
+      <td><%= element.Course_ID %></td>
+      <td class="text-left">
+          <a href="/paymentEdit/<%=element.Pay_ID%>" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i> Edit </a>
+          <a href="/payments/<%=element.Pay_ID%>" type="button" class="btn btn-light btn-small"><i class="bi bi-person-x"></i> Delete </a>
+      </td>
+    </tr>
+    <% }); %>
+
+  </tbody>
+</table>

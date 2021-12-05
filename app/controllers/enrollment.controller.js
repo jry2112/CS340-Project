@@ -87,9 +87,13 @@ module.exports.update = (req, res) => {
 // Delete an Enrollment with the specified StudentId in the request
 module.exports.delete = (req, res) => {
     console.log(req);
-    let id = req.params.enrollmentID;
-    let sql = 'DELETE FROM Cur_Enrolls WHERE Student_ID = ?';
-    sql = mysql.format(sql, id);
+    let values = [];
+    values.push(req.params.studentID);
+    values.push(req.params.courseID);
+    values.push(req.params.date);
+    //SELECT Student_ID, Course_ID FROM CurEnrolls WHERE DATE_FORMAT(Date, '%m/%d/%Y') = "12/04/2021";
+    let sql = "DELETE FROM Cur_Enrolls WHERE Student_ID = ?, Course_ID = ?, DATE_FORMAT(Date, '%m%e%Y')) = ?";
+    sql = mysql.format(sql, values);
 
     db.pool.query(sql, function (err, data){
         if (err) throw err;

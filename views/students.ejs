@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('partials/head'); %>
-<%- include('partials/header'); %>
-<div>
-    <h1>All Students Detail List</h1>
-    <h3>This page is for seeing all students and adding a student or jumping to another page for edits or payments.</h3>
-</div>
-
-<form action="/students" method="GET"></form>
-
+    <div class="row">
+        <div class="col-6"><h1>Students</h1></div>
+        <div class="col-6 d-flex justify-content-end">
+          <a href="/students/add" type="button" class="btn btn-primary align-self-center">Add Student</a>
+        </div>
+      
+      
+      </div>
+      
 <div>
     <table class="table">
         <tr>
@@ -33,7 +33,7 @@
                     <td><%=data.Phone %></td>
                     <td><%=data.Street %> <%=data.City %> <%=data.State %> <%=data.Zip %> <%=data.Country %></td>
                     <td>
-                        <form method="GET" action="/students/<%= data.Student_ID %>">
+                        <form method="GET" action="/students/edit/<%= data.Student_ID %>">
                             <button class="btn btn-info btn-sm" type="submit">Edit </button>
                         </form>
                     </td>
@@ -46,60 +46,12 @@
 <%         } %>
         
     </table>
-</div>
 
-    <h2 class="centered_text">To add a student please enter the following:</h2>
-    <form action ="/students" method="POST">
-        <div class="row">
-          <div class="form-floating col-md-3 mb-3">
-            <input type="text" class="form-control" id="firstName" name="firstName" required>
-            <label for="firstName">First name</label>
-            
-          </div>
-          <div class="form-floating col-md-3 mb-3">
-            <input type="text" class="form-control" id="lastName" name="lastName" required>
-            <label for="lastName">Last name</label>
-          </div>
-          <div class="form-floating col-md-3 mb-3">
-            <input type="email" class="form-control" id="email" name="email" required>
-            <label for="email">Email</label>
-          </div>
-          <div class="form-floating col-md-3 mb-3">
-            <input type="number" class="form-control" id="phone" name="phone" required>
-            <label for="phone">Phone</label>
-          </div>
-        </div>
-        <div class="row">
-            <div class="form-floating col-md-4 mb-3">
-                <input type="text" class="form-control" id="streetAddress" name="streetAddress" required>
-                <label for="streetAddress">Street Adrress</label>
-            </div>
-            <div class="form-floating col-md-4 mb-3">
-                <input type="text" class="form-control" id="city" name="city" required>
-                <label for="city">City</label>
-            </div>
-            <div class="form-floating col-md-2 mb-3">
-                <input type="text" class="form-control" id="state" name="state" required>
-                <label for="state">State</label>
-            </div>
-            <div class="form-floating col-md-2 mb-3">
-                <input type="text" class="form-control" id="zip" name="zip" required>
-                <label for="zip">Zip Code</label>
-            </div>
-            <div class=" form-floating col-md-2 mb-3">
-                <input type="text" class="form-control" id="country" name="country" required>
-                <label for="country">Country</label>
-            </div>
-        </div>
-
-        <button class="btn btn-primary btn-md" type="submit">Add Student</button>
-      </form>
-
-      <div>
+    <div>
         <h2>Quick Search</h2>
         <h3>Filter Enrollments based on Student information</h3>
         <div>
-            <form class="" action="/students/searchID" method="GET">
+            <form class="" action="/students/edit" method="GET">
                 <fieldset>
                     <div class="row">
                         <div class="col-md-4 mb-3">

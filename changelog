@@ -10,7 +10,7 @@ Fixed Find Student by ID:
 searchID is located in req.query.searchID
 
 Added Validation to CurEnroll:
-Cannot enroll student in course that is currently offered
+Cannot enroll student in course that is not currently offered
 
 Added Delete Student:
 Created AJAX route to handle delete student request (work on page reload after submission)
@@ -19,3 +19,8 @@ Added Update Student:
 Created AJAX routed to handle Student Update. 
 
 Continue working on page refresh for AJAX
+Currently refreshes: Students name but not address_data
+
+Validation in Students:
+If a duplicate student is entered, nothing happens. If a duplicate address is entered, existing address is added to the student
+- add popup for duplicate student

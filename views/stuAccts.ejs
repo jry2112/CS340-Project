@@ -1,0 +1,35 @@
+
+<%- include('partials/stuAccts-search') %>
+
+<br>
+
+<div class="row">
+  <div class="col-6"><h1>Student Balances</h1></div>
+  <div class="col-6 d-flex justify-content-end">
+    <a href="/stuAcctAdd" type="button" class="btn btn-primary align-self-center">Add Balance</a>
+  </div>
+
+
+</div>
+
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Student ID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% rows.forEach(element => { %>
+    <tr>
+      <th scope="row"><%= element.Student_ID %></th>
+      <td><%= element.First_Name %></td>
+      <td><%= element.Last_Name %></td>
+      <td><%= new Intl.NumberFormat ('en-US', { style: 'currency', currency: 'USD' }).format(element.Balance) %></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>

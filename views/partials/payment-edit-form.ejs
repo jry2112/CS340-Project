@@ -1,0 +1,71 @@
+
+    <div class="col-6">
+        <label for="floatingInput">Payment Amount</label>
+        <div class="form-floating mb-3">
+            <input type="number" step="0.01" class="form-control" id="floatingInput" value="<%= pay_data.Amount %>" placeholder="Payment Amount" name="amount" >
+        </div>
+    </div>
+
+
+    <div class="col-6">
+        <label for="floatingInput">Student ID</label>
+        <div class="form-floating mb-3">
+            <select id="floatingInput" class="form-control" name="student_id">
+                
+                <!-- Uses pay_data -->
+                <option value="<%=pay_data.Student_ID%>"><%=pay_data.Student_ID%> - <%=pay_data.First_Name%> <%=pay_data.Last_Name%> - Original Value</option> 
+                
+                <option value="0">Select a Student ID</option> 
+                <!-- Iterates through students_data -->
+                <% students_data.forEach(element => { %>
+                <option value="<%=element.Student_ID%>"><%=element.Student_ID%> - <%=element.First_Name%> <%=element.Last_Name%></option> 
+                <% }); %>
+                {{/each}}
+                
+
+            </select>
+        </div>
+    </div>
+    <!-- Uses pay_data -->
+    <div class="col-6">
+        <label for="floatingInput">Payment Method</label>
+        <div class="form-floating mb-3">
+            <select id="floatingInput" class="form-control" name="method">
+                <option value="0">Select a Payment Method</option>
+                <option value="Cash" <% if (pay_data.Method == 'Cash'){ %><%= 'selected' %><% } %>>Cash</option>
+                <option value="Check" <% if (pay_data.Method == 'Check'){ %><%= 'selected' %><% } %>>Check</option>
+                <option value="Card" <% if (pay_data.Method == 'Card'){ %><%= 'selected' %><% } %>>Card</option>
+                <option value="ACH" <% if (pay_data.Method == 'ACH'){ %><%= 'selected' %><% } %>>ACH</option>
+                <option value="Wire" <% if (pay_data.Method == 'Wire'){ %><%= 'selected' %><% } %>>Wire</option>
+            </select>
+        </div>
+    </div>
+
+
+    <!-- Uses pay_data -->
+    <div class="col-6">
+        <label for="floatingInput">Date</label>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingInput" value=<%= new Date(pay_data.Date).toISOString().slice(0, 10); %> placeholder='Date' name="date" required>
+        </div>
+    </div>
+    
+
+    <div class="col-6">
+        <label for="floatingInput">Course ID</label>
+        <div class="form-floating mb-3">
+            
+            <select id="floatingInput" class="form-control" name="course_id">
+                <option value=<%=pay_data.Course_ID%>><%=pay_data.Course_ID%> - <%=pay_data.Name%> - Original Value</option>
+                <option value="0">Select a Course ID</option> 
+                <% courses_data.forEach(element => { %>
+                <option value=<%=element.Course_ID%>><%=element.Course_ID%> - <%=element.Name%></option> 
+                <% }); %>
+
+            </select>
+        </div>
+    </div>
+
+    <div class="">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>

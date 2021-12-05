@@ -1,45 +1,128 @@
 const db = require("../../database/dbcon1.js");
 const mysql = require('mysql');
+const { response } = require("express");
+// Data validation helper functions
+
+function validateForm(req) {
+    let response = {
+        errors: [],
+        success: []
+    }
+
+    let student = [req.body.Student_ID]
+    let address = [req.body.Address_ID]
+
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var email = req.body.email;
+    var phone = req.body.phone;
+
+    var street = req.body.streetAddress;
+    var city = req.body.city;
+    var state = req.body.state;
+    var zip = req.body.zip;
+    var country = req.body.country;
+
+    // First and Last Name: A-Z, a-z only, capitalize first letter
+    // Email: [A-Z, a-z; '@'; "."; A-Z, a-z domain ending]
+    // Phone: [0-9] 10 digits
+    // Zip: 5-digit number chars
+    // Valid city, state, country = alphaletters with spaces allowed
+    const alphaLetters = /^[A-Za-z]+$/;
+    const emailChars = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const zipChars = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+    const alphaLettersWithSpace = /^[a-zA-Z\s]*$/;
+    const phoneNums = /^\d{10}/;
+
+    const validationList = {
+        firstName: alphaLetters.test(firstName),
+        lastName: alphaLetters.test(lastName),
+        email: emailChars.test(email),
+        phone: phoneNums.test(phone),
+        street: true,
+        city: alphaLettersWithSpace.test(city),
+        state: alphaLettersWithSpace.test(state),
+        country: alphaLettersWithSpace.test(country),
+        zip: zipChars.test(zip)
+    };
+
+    console.log(validationList);
+
+    if (!(validationList.firstName) || !(validationList.lastName)) {
+        response.errors.push("Invalid Name Entry, please only use letters.")
+    } else {
+        firstName = firstName.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ');
+        lastName = lastName.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ');
+        student.push(firstName);
+        student.push(lastName);
+
+    }
+
+    if (!(validationList.email)) {
+        response.errors.push("Invalid Email Entry, please use the format: sample@email.com.")
+    } else {
+        student.push(email.toLowerCase());
+    }
+
+    if (!(validationList.phone)) {
+        response.errors.push("Invalid Phone Entry, please use the format: 1231231234.")
+    } else {
+        student.push(phone);
+    }
+
+    if (!(validationList.city) || !(validationList.state) || !(validationList.country) || !(validationList.zip)) {
+        response.errors.push("Invalid Address entered. Please only enter letters and spaces for city, state, and country. Please use the following format for Zip Code: 12345 OR 12345-1234 ")
+    } else {
+        address.push(street);
+        address.push(city);
+        address.push(state);
+        address.push(zip);
+        address.push(country);
+    }
+    console.log(student);
+    return {responseData: response, 
+        studentData: student,
+        addressData: address};
+
+}
+
+
+
 // Create and Save a new Student
 exports.create = (req, res) => {
     // Validate request
+    let validation = validateForm(req);
 
+    console.log(validation);
+    if (validation.responseData.errors.length > 0) {
+        res.render('error', validation.responseData.errors);
+    }
     // Create a Student
-    let student = [
-        req.body.studentID,
-        req.body.firstName,
-        req.body.lastName,
-        req.body.email,
-        req.body.phone,
-        req.body.addressID];
-
-    let address = [
-        req.body.addressID,
-        req.body.streetAddress,
-        req.body.city,
-        req.body.state,
-        req.body.zip,
-        req.body.country
-    ];
+    let student =validation.studentData;
+    let address = validation.addressData;
 
     // Save Student in the database
-    let sql = 'INSERT INTO Students (Student_ID, First_Name, Last_Name, Email, Phone, Address_ID) VALUES (?,?,?,?,?,?)';
+    let sql = 'INSERT INTO Students (Student_ID, First_Name, Last_Name, Email, Phone) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE Student_ID = Student_ID';
     let lastStuIDsql = 'SELECT Student_ID FROM Students WHERE First_Name = ? AND Last_Name = ? AND Email = ? AND Phone = ?'
-    let addressSql = 'INSERT INTO Addresses (Address_ID, Street, City, State, Zip, Country) VALUES (?,?,?,?,?,?)';
-    let lastAddSql = 'SELECT Address_ID FROM Addresses WHERE Street = ? AND City = ? AND State = ? AND Zip = ? AND Country = ?'
+    let addressSql = 'INSERT INTO Addresses (Address_ID, Street, City, State, Zip, Country) VALUES (?,?,?,?,?,?) ON DUPLICATE KEY UPDATE Address_ID = Address_ID';
+    let lastAddSql = 'SELECT Address_ID FROM Addresses WHERE Street = ? AND City = ? AND State = ? AND Zip = ? AND Country = ?';
     let stuAddressSql = 'UPDATE Students SET Address_ID = ? WHERE Students.Student_ID = ?';
     sql = mysql.format(sql, student);
     lastStuIDsql = mysql.format(lastStuIDsql, student.slice(1));
     addressSql = mysql.format(addressSql, address);
     lastAddSql = mysql.format(lastAddSql, address.slice(1));
+    console.log(sql, lastStuIDsql, addressSql, lastAddSql);
     // Insert new Student
     db.pool.query(sql, (err, data) => {
+        console.log(sql);
         if (err) throw err;
         // Insert new Address
         db.pool.query(addressSql, (err, data) => {
+            console.log(addressSql);
             if (err) throw err;
             // Get new Address_ID
             db.pool.query(lastAddSql, (err, data) => {
+                console.log(lastAddSql);
                 if (err) throw err;
                 data =  JSON.parse(JSON.stringify(data));
                 console.log(data);
@@ -59,13 +142,16 @@ exports.create = (req, res) => {
                         if (err) throw err;
                     });
                 });
-            })  
-        })
-
-    })
-    
+            });  
+        });
+    });
    res.redirect('/students');
 };
+
+// Retrieve student add form
+module.exports.form = (req, res) => {
+    res.render('add-student', {row: null, alert: null, warning: null});
+}
 
 // Retrieve and return all Students from the database.
 module.exports.findAll = (req, res) => {
@@ -151,17 +237,27 @@ module.exports.delete = (req, res) => {
     let id = req.params.studentID;
     let sql = 'DELETE FROM Students WHERE Student_ID = ?';
     let getAddressSql = 'SELECT Address_ID FROM Students WHERE Student_ID = ?';
-    let delAddressSql = 'DELETE FROM Address_ID WHERE Address_ID= = ?';
+    let delAddressSql = 'DELETE FROM Addresses WHERE Address_ID = ?';
     sql = mysql.format(sql, id);
     getAddressSql = mysql.format(getAddressSql, id);
 
     // Get address ID
     db.pool.query(getAddressSql, function(err, address){
         if (err) throw err;
-        let addressID = address.Address_ID;
-        delAddressSql = mysql.format(delAddressSql, addressID);
+        let addressID = JSON.parse(JSON.stringify(address));
+        if (addressID) {
+            addressID = addressID[0].Address_ID;
+        }
+        console.log(addressID);
+        if (addressID == null) {
+            delAddressSql = mysql.format(delAddressSql, 0)
+        } else {
+            delAddressSql = mysql.format(delAddressSql, addressID);
+        }
+
         // Delete Address
         db.pool.query(delAddressSql, function(err, data){
+            if(err) throw err;
             // Delete Student
             db.pool.query(sql, function (err, data){
                 if (err) throw err;
@@ -174,10 +270,9 @@ module.exports.delete = (req, res) => {
                 //if Student found
                 } else {
                     var msg = `Student ${id} Successfully Deleted`;
-                } 
-                res.redirect('/students');     
+                }      
             });
         })
     })
-   
+    this.findAll(req, res);
 };

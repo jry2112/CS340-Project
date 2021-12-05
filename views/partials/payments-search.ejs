@@ -1,0 +1,72 @@
+
+<div class="col-6">
+    <h1>Search Payments</h1>
+</div>
+<br>
+
+<form class="row g-3 needs-validation border border-dark" method="post" action="/payments" novalidate>
+
+    <div class="col-6">
+        <label>Payment ID</label>
+            <input class="form-control me-2" type="search" placeholder="Search" name="search_pay_id" aria-label="Search">
+
+    </div>
+
+    <div class="col-6">
+        <label>Student ID</label>
+            <input class="form-control me-2" type="search" placeholder="Search" name="search_student_id" aria-label="Search">
+
+    </div>
+
+    <div class="col-6">
+        <label>First Name</label>
+            <input class="form-control me-2" type="search" placeholder="Search" name="search_first_name" aria-label="Search">
+
+    </div>
+
+    <div class="col-6">
+        <label>Last Name</label>
+            <input class="form-control me-2" type="search" placeholder="Search" name="search_last_name" aria-label="Search">
+
+    </div>
+
+    <div class="col-6">
+        <label>Payment Amount</label>
+            <input class="form-control me-2" type="search" placeholder="Search" name="search_amount" aria-label="Search">
+
+    </div>
+
+    <div class="col-6">
+        <label>Payment Methods</label>
+
+            <select id="floatingInput" class="form-control" name="search_method">
+                <option value="">All Methods</option>
+                <option value="Cash">Cash</option> 
+                <option value="Check">Check</option>
+                <option value="Card">Card</option>
+                <option value="ACH">ACH</option>
+                <option value="Wire">Wire</option>
+            </select>
+
+    </div>
+
+    <div class="col-6">
+        <label for="floatingInput">Date</label>
+
+            <input type="date" class="form-control" id="floatingInput" placeholder='Date' name="search_date" required>
+
+    </div>
+
+    <div class="col-6">
+        <label>Course ID</label>
+            <input class="form-control me-2" type="search" placeholder="Search" name="search_course_id" aria-label="Search">
+    </div>
+
+    <br>
+
+    <div class="col-6">
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+        
+    </div>
+</form>
+

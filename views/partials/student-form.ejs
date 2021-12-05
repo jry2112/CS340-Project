@@ -1,0 +1,49 @@
+<h2 class="centered_text">To add a student please enter the following:</h2>
+<form action ="/students" method="POST" id="addStudentForm">
+    <div class="row">
+      <div class="form-floating col-md-3 mb-3">
+        <input type="text" class="form-control" id="firstName" name="firstName" required>
+        <label for="firstName">First name</label>
+        
+      </div>
+      <div class="form-floating col-md-3 mb-3">
+        <input type="text" class="form-control" id="lastName" name="lastName" required>
+        <label for="lastName">Last name</label>
+      </div>
+      <div class="form-floating col-md-3 mb-3">
+        <input type="email" class="form-control" id="email" name="email" required>
+        <label for="email">Email</label>
+      </div>
+      <div class="form-floating col-md-3 mb-3">
+        <input type="number" class="form-control" id="phone" name="phone" required>
+        <label for="phone">Phone</label>
+      </div>
+    </div>
+    <div class="row">
+        <div class="form-floating col-md-4 mb-3">
+            <input type="text" class="form-control" id="streetAddress" name="streetAddress" required>
+            <label for="streetAddress">Street Adrress</label>
+        </div>
+        <div class="form-floating col-md-4 mb-3">
+            <input type="text" class="form-control" id="city" name="city" required>
+            <label for="city">City</label>
+        </div>
+        <div class="form-floating col-md-2 mb-3">
+            <%- include('state-options') %>
+            <label for="state">State</label>
+        </div>
+        <div class="form-floating col-md-2 mb-3">
+            <input type="text" class="form-control" id="zip" name="zip" required>
+            <label for="zip">Zip Code</label>
+        </div>
+        <div class=" form-floating col-md-2 mb-3">
+            <input type="text" class="form-control" id="country" name="country" required>
+            <label for="country">Country</label>
+        </div>
+    </div>
+
+    <button class="btn btn-primary btn-md" type="submit">Add Student</button>
+  </form>
+
+  
+<script type="text/javascript" src="../js/students.js"></script>

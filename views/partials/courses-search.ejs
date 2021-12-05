@@ -1,0 +1,45 @@
+
+<div class="col-6">
+    <h1>Search Courses</h1>
+</div>
+<br>
+
+<form class="row g-3 needs-validation border border-dark" method="post" action="/courses" novalidate>
+
+    <div class="col-6">
+        <label>Course ID Search</label>
+            <input class="form-control me-2" type="search" placeholder="Search" name="search_course_id" aria-label="Search">
+
+    </div>
+
+    <div class="col-6">
+        <label>Course Name</label>
+            <input class="form-control me-2" type="search" placeholder="Search" name="search_course_name" aria-label="Search">
+
+    </div>
+
+    <div class="col-6">
+        <label>Course Offered (Select from Both, NO, YES)</label>
+
+            <select id="floatingInput" class="form-control" name="search_cur_offer">
+                <option value="">Both</option>
+                <option value="0">NO</option> 
+                <option value="1">YES</option>
+            </select>
+
+    </div>
+
+    <div class="col-6">
+        <label>Instructor</label>
+        <input class="form-control me-2" type="search" placeholder="Search" name="search_instructor" aria-label="Search">
+
+    </div>
+
+    <br>
+
+    <div class="col-6">
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+        
+    </div>
+</form>
+

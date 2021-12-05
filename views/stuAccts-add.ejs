@@ -1,0 +1,30 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/stuAccts">Student Balances</a></li>
+    <li class="breadcrumb-item active" aria-current="page">New Student Balance</li>
+  </ol>
+</nav>
+
+<div>
+  <h2>Reminder: only students without an existing balance can be added!</h2>
+</div>
+
+<% if(alert){ %>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <%= alert %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+<% if(warning){ %>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <%= warning %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+<form class="row g-3 needs-validation" method="POST" action="/stuAcctAdd" novalidate>
+
+    <%- include('partials/stuAccts-form') %>
+
+</form>

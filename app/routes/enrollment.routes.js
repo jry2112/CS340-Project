@@ -13,8 +13,6 @@ module.exports = (app) =>{
     
     // Insert an Enrollment
     app.post('/enrollment', enrollment.create)
-    // Update an Enrollment
-    app.put('/enrollment/:enrollmentID', enrollment.update);
     // Delete an Enrollment
-    app.delete('/enrollment/:enrollmentID', enrollment.delete);
+    app.delete('/students/:studentID/courses/:courseID/date/:date', enrollment.delete);
 }

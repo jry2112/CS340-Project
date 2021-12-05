@@ -1,0 +1,50 @@
+    <div class="col-6">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" value="<% if(row){ %><%= row.Course_ID %> <% } %>" placeholder="Course ID" name="course_id">
+            <label for="floatingInput">Course ID</label>
+        </div>
+    </div>
+    
+    <div class="col-6">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" value="<% if(row){ %><%= row.Name %> <% } %>" placeholder="Course Name" name="course_name">
+            <label for="floatingInput">Course Name</label>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="floatingInput" value="<% if (row){ %><%=row.Price%><% } %>" placeholder="Course Price" name="course_price">
+            <label for="floatingInput">Course Price</label>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" value="<% if (row){ %><%= row.Instructor %><% } %>" placeholder="Instructor Name" name="instructor">
+            <label for="floatingInput">Instructor Name</label>
+        </div>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="
+        <% if (row){ %>
+        <%= row.Cur_Offer%>
+        <% } %>
+        " 
+        
+        <% if (row && row.Cur_Offer == 1){ %>
+        <%= 'checked'%>
+        <% } %>
+
+        
+
+         id="defaultCheck1" name="cur_offer">
+        <label class="form-check-label" for="defaultCheck1">
+            Currently Offered
+        </label>
+    </div>
+
+    <div class="col-1 d-grid">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>

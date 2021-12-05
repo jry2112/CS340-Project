@@ -1,5 +1,6 @@
 const express = require("express");
 const ejs = require("ejs");
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 
 const path = require("path");
@@ -12,8 +13,10 @@ const database = process.env.MYSQL_DB;
 let db = require("./database/dbcon1.js");
 
 // set the view engine to ejs
+app.use(expressLayouts)
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.set('layout', 'layouts/layout')
 
 // bodyparser
 app.use(express.urlencoded({ extended: true }));
@@ -56,28 +59,6 @@ app.get("/", (req, res) => {
   res.render("index", {});
 });
 
-
-// courses page
-app.get("/courses", (req, res) => {
-  res.render("courses", {});
-});
-
-// individual course page
-app.get("/courses/:id", (req, res) => {
-  res.render("course", {});
-});
-
-
-
-// payments page
-app.get("/payments", (req, res) => {
-  res.render("payments", {});
-});
-
-// student accounts page
-app.get("/accounts", (req, res) => {
-  res.render("student-accounts", {});
-});
 
 app.listen(port, () => {
   require("./app/routes/students.routes.js")(app);
