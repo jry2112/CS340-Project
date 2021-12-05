@@ -49,25 +49,21 @@
 
     <div>
         <h2>Quick Search</h2>
-        <h3>Filter Enrollments based on Student information</h3>
+        <h3>Filter Students based on Student information</h3>
         <div>
-            <form class="" action="/students/search" method="GET">
-                <fieldset>
+            <form class="row g-3 border border-dark" action="/students/search" method="GET">
+
                     <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="searchID">Enter Student ID</label>
+                        <div class="form-floating col-md-4 mb-3">
                             <input class="form-control" type="text" name="searchID" required>
+                            <label for="searchID">Student ID</label>
                         </div>
                         <div class="col-md-4 mb-3">
                             <button class="btn btn-primary btn-md" type="submit">Find By ID</button>
                         </div>
-                        <!--JS coding is required for data validation as html is not sufficient-->
-                    
-                    <br>
-                    
+ 
                     </div>
-                    
-                </fieldset>
+
             </form>
         </div>
     </div>
