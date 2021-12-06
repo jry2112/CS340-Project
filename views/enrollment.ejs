@@ -1,5 +1,16 @@
 <h1>Current Enrollment</h1>
-<h3>This page is for viewing Current Course Enrollments</h3>
+
+<form class="row g-3" action="/enrollment/search" method="GET">
+    <legend>Search</legend>
+  <div class="col form-floating">
+    <label for="searchID">Enter Student or Course ID</label>
+    <input class="form-control" type="text" name="searchID" required>
+  </div>
+  <div class="col">
+    <button class="btn btn-outline-dark" type="submit">Find By ID</button>
+  </div>
+</form>
+
 <div class="row">
     <div class="col-6"><h1>Enrollments</h1></div>
     <div class="col-6 d-flex justify-content-end">
@@ -41,21 +52,3 @@
         
     </table>
 </div>
-
-<div>
-    <h2>Quick Search</h2>
-    <h3>Filter Enrollments based on Student information or Course information</h3>
-    <div>
-        <form class="" action="/enrollment/search" method="GET">
-            <fieldset>
-                <!--JS coding is required for data validation as html is not sufficient-->
-                <label for="searchID">Enter Student or Course ID</label>
-                <input class="input" type="text" name="searchID" required>
-                <br>
-                <button class="submit" type="submit">Find By ID</button>
-            </fieldset>
-        </form>
-    </div>
-</div>
-<script type="text/javascript" src="../js/enrollment.js"></script>
-<%- include('partials/footer'); %>

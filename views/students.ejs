@@ -1,6 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-    <div class="row">
+
+    <form class=" row g-3" action="/students/search" method="GET">
+            <legend>Search</legend>
+          <div class="col form-floating">
+            <input class="form-control" type="text" name="searchID" required>
+            <label for="searchID">Student ID</label>
+          </div>
+          <div class="col">
+            <button class="btn btn-outline-dark" type="submit">Find By ID</button>
+          </div>
+      </form>
+    
+
+<div class="row">
         <div class="col-6"><h1>Students</h1></div>
         <div class="col-6 d-flex justify-content-end">
           <a href="/students/add" type="button" class="btn btn-primary align-self-center">Add Student</a>
@@ -47,26 +58,6 @@
         
     </table>
 
-    <div>
-        <h2>Quick Search</h2>
-        <h3>Filter Students based on Student information</h3>
-        <div>
-            <form class="row g-3 border border-dark" action="/students/search" method="GET">
-
-                    <div class="row">
-                        <div class="form-floating col-md-4 mb-3">
-                            <input class="form-control" type="text" name="searchID" required>
-                            <label for="searchID">Student ID</label>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <button class="btn btn-primary btn-md" type="submit">Find By ID</button>
-                        </div>
- 
-                    </div>
-
-            </form>
-        </div>
-    </div>
     
     <script type="text/javascript" src="../js/students.js"></script>
 
