@@ -17,3 +17,5 @@ module.exports = (app) =>{
     // Delete an Enrollment
     app.delete('/students/:studentID/courses/:courseID/date/:month/:day/:year', enrollment.delete);
 }
+
+// Source: https://blog.logrocket.com/node-js-express-js-mysql-rest-api-example/

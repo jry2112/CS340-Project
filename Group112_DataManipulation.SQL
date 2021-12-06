@@ -7,25 +7,36 @@
 
 -- DM Queries for Students
 
--- Insert a Student
-INSERT INTO `Students` (`Student_ID`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Address_ID`) VALUES
-(?Student_ID_Input, ?First_Name_Input, ?Last_Name_Input, ?Email_Input, Phone_Input, Address_ID_Input);
+-- Insert a Student and Address
+INSERT INTO `Students` (`Student_ID`, `First_Name`, `Last_Name`, `Email`, `Phone`) VALUES
+(?Student_ID_Input, ?First_Name_Input, ?Last_Name_Input, ?Email_Input, ?Phone_Input) ON DUPLICATE KEY UPDATE Student_ID = Student_ID;
+SELECT Student_ID FROM Students WHERE First_Name = ?First_Name_Input AND Last_Name = ?Last_Name_Input AND Email = ?Email_Input AND Phone = ?Phone_Input;
+INSERT INTO Addresses (Address_ID, Street, City, State, Zip, Country) VALUES (?Address_ID, ?Street_Input, ?City_Input, ?State_Input, ?Zip_Input, ?Country_Input) ON DUPLICATE KEY UPDATE Address_ID = Address_ID;
+SELECT Address_ID FROM Addresses WHERE Street = ?Street_Input AND City = ?City_Input AND State = ?State_Input AND Zip = ?Zip_Input AND Country = ?Country_Input;
+UPDATE Students SET Address_ID = ?Address_ID_Input WHERE Students.Student_ID = ?Student_ID_Input;
 
--- Update a Student
-UPDATE `Students`
-SET `Email` = ?Email_Input, `First_Name` = ?First_Name_Input, `Last_Name` = ?Last_Name_Input, `Phone` = ?Phone_Input, `Address_ID` = ?Address_ID_Input
-WHERE `Student_ID` = ?Student_ID_Input;
+-- Update a Student and Address
+SELECT Address_ID from Students WHERE Student_ID = ?Student_ID_Input;
+UPDATE `Addresses` SET `Street`= ?Street_Input,`City`= ?City_Input,`State`= ?State_Input,`Zip`= ?Zip_Input,`Country`= ?Country
+    WHERE `Address_ID` = ?Address_ID_Input;
+UPDATE `Students` SET `First_Name` = ?First_Name_Input, `Last_Name` = ?Last_Name_Input, `Email` = ?Email_Input, `Phone` = ?Phone_Input WHERE `Student_ID` = ?Student_ID_Input;
 
--- Delete a Student
-DELETE FROM `Students`
-WHERE `Student_ID` = ?Student_ID_Input;
+-- Delete a Student and Address
+DELETE FROM Students WHERE Student_ID = ?Student_ID_Input;
+SELECT Address_ID FROM Students WHERE Student_ID = ?Student_ID_Input;
+DELETE FROM Addresses WHERE Address_ID = ?Address_ID_Input
+    AND NOT EXISTS(SELECT * FROM Students WHERE Address_ID = ?Address_ID_Input AND Student_ID != ?Student_ID_Input);
 
--- Select All Students
-SELECT * FROM `Students`;
+-- Select All Students and Addresses
+SELECT * FROM Students LEFT JOIN Addresses ON Students.Address_ID = Addresses.Address_ID ORDER BY Student_ID asc;
 
 -- Select a Student By ID
-SELECT * FROM `Students`
-WHERE `Student_ID` = ?Student_ID_Input;
+SELECT * FROM Students LEFT JOIN Addresses ON Students.Address_ID = Addresses.Address_ID WHERE Student_ID LIKE ?Student_ID_Input;
+SELECT Courses.Course_ID, Courses.Name, Courses.Instructor
+    FROM Courses
+    JOIN CurEnrolls ON Courses.Course_ID = CurEnrolls.Course_ID
+        JOIN Students ON CurEnrolls.Student_ID = Students.Student_ID
+        WHERE Students.Student_ID = ?Student_ID_Input;
 
 --Select a Student by Name
 SELECT * FROM `Students`
@@ -136,7 +147,7 @@ SELECT * FROM `Payments` WHERE `Course_ID` = ?Course_ID_input;
 
 --------------------------------------------------------------------------------------
 
--- DM Queries for Addresses
+-- DM Queries for Addresses - (incorporated into Students)
 -- Get all addresses from  Addresses Table: 
 SELECT * FROM `Addresses`;
 
@@ -176,7 +187,22 @@ SELECT * FROM `Addresses` WHERE `Country` LIKE “%?Country_Input%”
 -- DM Queries for CurEnrolls
 
 -- View Current Enrollment
-SELECT * FROM `CurEnrolls`;
+SELECT Students.Student_ID, Students.First_Name, Students.Last_Name, Courses.Course_ID, Courses.Name, Courses.Instructor, CurEnrolls.Date \
+    FROM Students JOIN CurEnrolls ON Students.Student_ID = CurEnrolls.Student_ID\
+     JOIN Courses ON CurEnrolls.Course_ID = Courses.Course_ID;;
+-- Creating an Enrollment
+-- View Enrollment Form options inputs
+SELECT Student_ID FROM Students WHERE 1;
+SELECT Course_ID FROM Courses WHERE Cur_Offer = 1;
+-- Validate then Enroll the Student
+SELECT Cur_Offer FROM Courses WHERE Course_ID = ?Course_ID_Input;
+INSERT INTO CurEnrolls (Student_ID, Course_ID) VALUES (?Student_ID_Input,?Course_ID_Input) ON DUPLICATE KEY UPDATE Student_ID = Student_ID;
+
+-- Filter by Student ID or Course ID
+SELECT Students.Student_ID, Students.First_Name, Students.Last_Name, Courses.Course_ID, Courses.Name, Courses.Instructor, CurEnrolls.Date
+    FROM Students JOIN CurEnrolls ON Students.Student_ID = CurEnrolls.Student_ID
+     JOIN Courses ON CurEnrolls.Course_ID = Courses.Course_ID
+     WHERE Students.Student_ID LIKE ?Student_ID_Input OR Courses.Course_ID LIKE ?Course_ID_Input
 
 -- Filter by Student ID
 SELECT * FROM `CurEnrolls` WHERE `Student_ID` = ?Student_ID_Input;
@@ -186,6 +212,11 @@ SELECT * FROM `CUrEnrolls` WHERE `Student_ID` LIKE '%?Student_ID_Input%';
 SELECT * FROM `CurEnrolls` WHERE `Course_ID` = ?Course_ID_Input;
 SELECT * FROM `CUrEnrolls` WHERE `Course_ID` LIKE '%?Course_ID_Input%';
 
+
+-- Delete Current Enrollment
+DELETE FROM CurEnrolls WHERE Student_ID = ?Student_ID_Input AND Course_ID = ?Course_ID_Input AND Date = STR_TO_DATE(?Date_Input, '%m%d%Y');
+
+-- Unused
 -- Filter by Date
 SELECT * FROM `CurEnrolls` WHERE `Date` = ?Date_Input;
 
@@ -199,8 +230,3 @@ WHERE `Date` <= ?Date_Input
 
 -- Update Current Enrollment:
 UPDATE `CurEnrolls` SET `Student_ID` = ?Student_ID_Input, `Course_ID` = ?Course_ID_Input,`Date` = ?Date_Input WHERE `Student_ID` = ?Student_ID_Input;
-
--- Delete Current Enrollment
-DELETE FROM `CurEnrolls`
-WHERE `Course_ID` = ?ID_Input
-OR `Student_ID` = ?ID_Input;

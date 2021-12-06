@@ -124,3 +124,5 @@ module.exports.delete = (req, res) => {
     })
     this.findAll(req,res);
 };
+
+// Source: https://blog.logrocket.com/node-js-express-js-mysql-rest-api-example/
