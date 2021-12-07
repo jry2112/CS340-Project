@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Courses_Controller = require('../controllers/Courses_Controller');
-const Payments_Controller = require('../controllers/Payments_Controller');
-const StuAccts_Controller = require('../controllers/StuAccts_Controller');
+const Courses_Controller = require('../controllers/courses.controller');
+const Payments_Controller = require('../controllers/payments.controller');
+const StuAccts_Controller = require('../controllers/stuAccts.controller');
 const Index_Controller = require('../controllers/Index_Controller');
 
 //              Index Page:
