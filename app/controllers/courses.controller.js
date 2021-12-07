@@ -10,7 +10,7 @@ exports.view = (req, res) => {
         console.log('Connected as ID ' + connection.threadId);
         
         // Must Use the correct database first!!!
-        connection.query('USE cs340_garzacao')
+        connection.query('USE cs340_younjada')
 
         // Courses the connection
         connection.query('SELECT * FROM Courses ORDER BY Course_ID asc', (err, rows) => {
@@ -34,7 +34,7 @@ exports.find = (req, res) => {
     console.log('Connected as ID for course.find ' + connection.threadId);
     
     // Must Use the correct database first!!!
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
 
     let course_search = req.body;
     
@@ -155,7 +155,7 @@ exports.edit = (req, res) => {
     console.log('Connected as ID ' + connection.threadId);
     
     // Must Use the correct database first!!!
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
 
     let searchTerm = req.body.search;
 
@@ -275,7 +275,7 @@ exports.delete = (req, res) => {
     console.log('Connected as ID ' + connection.threadId);
     
     // Must Use the correct database first!!!
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
 
     let searchTerm = req.body.search;
 
@@ -308,7 +308,7 @@ function courseEditMessage(valid, message, req, res){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
 
       connection.query('SELECT * FROM Courses WHERE Course_ID = ?', [req.params.id], (err, rows) => {
         
@@ -361,7 +361,7 @@ function getCourses(obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Delete from Payments 
       connection.query('SELECT * FROM Courses', (err, rows) => {
@@ -386,7 +386,7 @@ function insertCourse(course_name, cur_offer, price, instructor, query_obj){
       }
   
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
 
       // Query for INSERT of New StuAcct
       connection.query('INSERT INTO Courses (Name, Cur_Offer, Price, Instructor) VALUES (?, ?, ?, ?)', [course_name, cur_offer, price, instructor], (err, rows) => {
@@ -415,7 +415,7 @@ function getCourse(course_id, obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Delete from Payments 
       connection.query('SELECT * FROM Courses WHERE Course_ID = ?', [course_id], (err, rows) => {
@@ -441,7 +441,7 @@ function updateCourse(new_course_id, course_id, course_name, cur_offer, price, i
       }
   
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
 
       // Query for INSERT of New StuAcct
       connection.query('UPDATE Courses SET Course_ID = ?, Name = ?, Cur_Offer = ?, Price = ?, Instructor = ? WHERE Course_ID = ?', [new_course_id, course_name, cur_offer, price, instructor, course_id], (err, rows) => {
@@ -470,7 +470,7 @@ function getOtherCourses(course_id, obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Delete from Payments 
       connection.query('SELECT * FROM Courses WHERE NOT Course_ID = ?', [course_id], (err, rows) => {

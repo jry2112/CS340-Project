@@ -14,7 +14,7 @@ module.exports = (app) => {
   app.get('/students/search', function(req, res){
     console.log(req.query);
     students.findOne(req,res);
-});
+  });
   // Insert a Student
   app.get('/students/add', students.form);
   app.post("/students", students.create);
@@ -23,41 +23,49 @@ module.exports = (app) => {
   // Delete a Student
   app.delete("/students/:studentID", students.delete);
 
-  // Courses: create, find, update, delete
-  app.get("/courses", Courses_Controller.view);
-  app.post("/courses", Courses_Controller.find);
-  app.get("/courses/:id", Courses_Controller.delete);
+    //              Index Page:
+  app.get('/', Index_Controller.home);
 
-  app.get("/addCourse", Courses_Controller.form);
-  app.post("/addCourse", Courses_Controller.insert);
-
-  app.get("/editCourse/:id", Courses_Controller.edit);
-  app.post("/editCourse/:id", Courses_Controller.update);
-
-  //              Payments:
+  //              Courses:
   // Display:
-  app.get("/payments", Payments_Controller.view);
+  app.get('/courses', Courses_Controller.view);
+  // Search for Course:
+  app.post('/courses', Courses_Controller.find);
+  // Add Course Page:
+  app.get('/addCourse', Courses_Controller.form);
+  // Insert new Course to Database:
+  app.post('/addCourse', Courses_Controller.insert);
+  // Edit Course Page:
+  app.get('/editCourse/:id', Courses_Controller.edit);
+  // Update Course in Database:
+  app.post('/editCourse/:id', Courses_Controller.update);
+  // Delete Course from Database:
+  app.get('/courses/:id', Courses_Controller.delete);
+
+  //              Payments: 
+  // Display:
+  app.get('/payments', Payments_Controller.view);
+  // Search for Payments: 
+  app.post('/payments', Payments_Controller.find);
   // Add Payment Page with form:
-  app.get("/paymentAdd", Payments_Controller.form);
-  // Insert new Payment into Database:
-  app.post("/paymentAdd", Payments_Controller.insert);
-  // Delete Payment in Database:
-  app.get("/payments/:id", Payments_Controller.delete);
+  app.get('/paymentAdd', Payments_Controller.form);
+  // Insert new Payment into Database: 
+  app.post('/paymentAdd', Payments_Controller.insert);
   // Edit Page View:
-  app.get("/paymentEdit/:id", Payments_Controller.edit);
+  app.get('/paymentEdit/:id', Payments_Controller.edit);
   // Update Database info:
-  app.post("/paymentEdit/:id", Payments_Controller.edit);
+  app.post('/paymentEdit/:id', Payments_Controller.update);
+  // Delete Payment in Database:
+  app.get('/payments/:id', Payments_Controller.delete);
 
   //              StuAccts:
   // Display:
-  app.get("/stuAccts", StuAccts_Controller.view);
+  app.get('/stuAccts', StuAccts_Controller.view);
+  // Search for StuAccts: 
+  app.post('/stuAccts', StuAccts_Controller.find);
   // Add Student Acct Balance:
-  app.get("/stuAcctAdd", StuAccts_Controller.form);
+  app.get('/stuAcctAdd', StuAccts_Controller.form);
   // Insert new Student Acct/Balance:
-  app.post("/stuAcctAdd", StuAccts_Controller.insert);
-
-  // Delete Balance:
-  //app.get("/stuAccts/:id", StuAccts_Controller.delete);
 };
 
 

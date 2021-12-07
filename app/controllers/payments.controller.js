@@ -9,7 +9,7 @@ exports.view = (req, res) => {
         console.log('Connected as ID ' + connection.threadId);
         
         // Must Use the correct database first!!!
-        connection.query('USE cs340_garzacao')
+        connection.query('USE cs340_younjada')
 
         // Payment the connection
         connection.query('SELECT * FROM (Payments JOIN Students USING (Student_ID))', (err, rows) => {
@@ -33,7 +33,7 @@ exports.find = (req, res) => {
     console.log('Connected as ID ' + connection.threadId);
     
     // Must Use the correct database first!!!
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
 
     let course_search = req.body;
     
@@ -72,7 +72,7 @@ exports.form = (req, res) => {
   db.pool.getConnection((err, connection) => {
     if(err) throw err;
   
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
     // Query to get student ids to populate student id field, to Populate Drop Down.
     connection.query('SELECT Student_ID, First_Name, Last_Name FROM Students', (err, rows) => {
       let student_ids = rows
@@ -313,7 +313,7 @@ exports.delete = (req, res) => {
     console.log('Connected as ID ' + connection.threadId);
     
     // Must Use the correct database first!!!
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
 
     const pay_id = req.params.id
 
@@ -357,7 +357,7 @@ function getBal(stu_id, obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Searching for a Course Name using search bar. 
       connection.query('SELECT Balance FROM StuAccts WHERE Student_ID = ?', [stu_id], (err, rows) => {
@@ -382,7 +382,7 @@ function getPayData(id, obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Searching for a Course Name using search bar. 
       connection.query('SELECT * FROM Payments JOIN Courses USING (Course_ID) JOIN Students USING (Student_ID) WHERE Pay_ID = ?', [id], (err, rows) => {
@@ -408,7 +408,7 @@ function updateBal(id, newBalance, obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Searching for a Course Name using search bar. 
       connection.query('UPDATE StuAccts SET Balance = ? WHERE Student_ID = ?', [newBalance, id], (err, rows) => {
@@ -432,7 +432,7 @@ function deletePayment(id, obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Delete from Payments 
       connection.query('DELETE FROM Payments WHERE Pay_ID = ?', [id], (err, rows) => {
@@ -457,7 +457,7 @@ function getStudents(obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Delete from Payments 
       connection.query('SELECT * FROM Students', (err, rows) => {
@@ -482,7 +482,7 @@ function getCourses(obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Delete from Payments 
       connection.query('SELECT * FROM Courses', (err, rows) => {
@@ -506,7 +506,7 @@ function updatePay(payment_id, student_id, amount, method, date, course_id, retu
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Updating a Payment with all the information. 
       connection.query('UPDATE Payments SET Student_ID = ?, Amount = ?, Method = ?, Date = ?, Course_ID = ? WHERE Pay_ID = ?',
@@ -608,7 +608,7 @@ function insertPay(student_id, amount, method, date, course_id, return_obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
   
       // Insert a NEW Payment. 
       connection.query('INSERT INTO Payments SET Student_ID = ?, Amount = ?, Method = ?, Date = ?, Course_ID = ?',

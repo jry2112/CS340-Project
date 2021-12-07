@@ -63,6 +63,7 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   require("./app/routes/students.routes.js")(app);
   require("./app/routes/enrollment.routes.js")(app);
+  require("./app/routes/RouterFile");
   console.log(`Server started on port ${port}`);
   console.log(`Connecting to database ${database} on ${host}`);
 });

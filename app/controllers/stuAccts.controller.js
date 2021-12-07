@@ -11,7 +11,7 @@ exports.view = (req, res) => {
     console.log('Connected as ID ' + connection.threadId);
     
     // Must Use the correct database first!!!
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
 
     // Courses the connection
     connection.query('SELECT * FROM StuAccts JOIN Students USING (Student_ID)', (err, rows) => {
@@ -35,7 +35,7 @@ exports.find = (req, res) => {
     console.log('Connected as ID ' + connection.threadId);
     
     // Must Use the correct database first!!!
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
 
     let course_search = req.body;
     
@@ -73,7 +73,7 @@ exports.form = (req, res) => {
     console.log('Connected as ID ' + connection.threadId);
     
     // Must Use the correct database first!!!
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
 
     // Courses the connection
     connection.query('SELECT * FROM Students WHERE Student_ID NOT IN (SELECT Student_ID FROM StuAccts)', (err, rows) => {
@@ -115,7 +115,7 @@ exports.insert = (req, res) => {
     console.log('Connected as ID ' + connection.threadId);
     
     // Must Use the correct database first!!!
-    connection.query('USE cs340_garzacao')
+    connection.query('USE cs340_younjada')
 
     let get_ids = {}
     let bal_return_obj = {}
@@ -147,7 +147,7 @@ function getNewStudentIds(ids_obj){
       }
 
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
 
       // Query for INSERT of New StuAcct
       connection.query('SELECT * FROM Students WHERE Student_ID NOT IN (SELECT Student_ID FROM StuAccts)', (err, rows) => {
@@ -175,7 +175,7 @@ function insertBal(stu_id, new_bal, query_obj){
       }
   
       // Must Use the correct database first!!!
-      connection.query('USE cs340_garzacao')
+      connection.query('USE cs340_younjada')
 
       // Query for INSERT of New StuAcct
       connection.query('INSERT INTO StuAccts (Student_ID, Balance) VALUES (?, ?)', [stu_id, new_bal], (err, rows) => {
